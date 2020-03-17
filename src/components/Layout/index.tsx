@@ -7,7 +7,7 @@ const ContentWrap = styled.div`
   width: 100%;
 `;
 
-export const LayoutHOC = Page => {
+export function LayoutHOC(Page: React.ComponentType) {
   return () => (
     <ContentWrap>
       <Header />

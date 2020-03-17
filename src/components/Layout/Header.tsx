@@ -62,7 +62,7 @@ const Header = () => {
                 <Link to="/product">마이웨이</Link>
               </li>
               <li>
-                <Link exact to="/ranking">마이웨이</Link>
+                <Link to="/ranking">마이웨이</Link>
               </li>
             </ul>
           </HeaderNav>
