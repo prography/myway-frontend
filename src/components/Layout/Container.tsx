@@ -7,16 +7,12 @@ type Props = {
 
 const CotainerWrap = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1220px;
   margin: 0 auto;
 `;
 
 function Container({ children }: Props) {
-  return (
-    <CotainerWrap>
-      {children}
-    </CotainerWrap>
-  );
+  return <CotainerWrap>{children}</CotainerWrap>;
 }
 
 export default Container;
