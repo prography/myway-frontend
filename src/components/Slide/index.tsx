@@ -45,13 +45,11 @@ function Slide({ children }: Props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    appendDots: (dots: any) => {
-      return (
-        <Slick>
-          <ul>{dots}</ul>
-        </Slick>
-      );
-    },
+    appendDots: (dots: any) => (
+      <Slick>
+        <ul>{dots}</ul>
+      </Slick>
+    ),
     customPaging: () => <div className="slick-dot-custom" />,
   };
 
