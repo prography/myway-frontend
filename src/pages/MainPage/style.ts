@@ -29,7 +29,10 @@ export const Section = styled.div`
     & > div {
       width: 50%;
       background-color: #232328;
-      border-right: 1px solid #fff;
+
+      &:first-child {
+        border-right: 1px solid #fff;
+      }
     }
 
     .map-detail-view {
@@ -114,9 +117,9 @@ export const ApplyButton = styled.button`
 export const SliderViewer = styled.div`
   width: 100%;
 
-  .slide-section {
+  .slide-image {
     position: relative;
-    padding-bottom: 34.375rem;
+    padding-bottom: 50%;
     overflow: hidden;
     background: #333;
 
