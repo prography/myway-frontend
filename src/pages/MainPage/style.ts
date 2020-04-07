@@ -29,7 +29,10 @@ export const Section = styled.div`
     & > div {
       width: 50%;
       background-color: #232328;
+
+      &:first-child {
       border-right: 1px solid #fff;
+    }
     }
 
     .map-detail-view {
