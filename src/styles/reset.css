@@ -7,8 +7,11 @@
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2d2a28;
   outline: none;
+}
+
+body {
+  color: #2d2a28;
 }
 
 a {
