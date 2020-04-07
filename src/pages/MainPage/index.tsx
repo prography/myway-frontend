@@ -39,9 +39,15 @@ const MainPage = () => {
           </SectionTitle>
           <SliderViewer>
             <Slide>
-              <div className="slide-section">1</div>
-              <div className="slide-section">2</div>
-              <div className="slide-section">3</div>
+              <div className="slide-image">
+                <img
+                  src="https://images.unsplash.com/photo-1541173109020-9c5d8a48e169?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1299&q=80"
+                  alt=""
+                />
+              </div>
+              <div className="slide-image"></div>
+              <div className="slide-image"></div>
+              <div className="slide-image"></div>
             </Slide>
           </SliderViewer>
         </Container>
