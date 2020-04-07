@@ -1,8 +1,37 @@
 import React from 'react';
 import Slider from 'react-slick';
+import styled from 'styled-components';
 
 import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
+const Slick = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+
+    li {
+      margin: 0 0.65rem;
+      cursor: pointer;
+
+      div {
+        width: 7px;
+        height: 7px;
+        border-radius: 3.5px;
+        background-color: #dddddd;
+        transition: width 0.2s;
+      }
+
+      &.slick-active div {
+        width: 35px;
+        background-color: ${(props) => props.theme.palette.mainColor};
+      }
+    }
+  }
+`;
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +45,14 @@ function Slide({ children }: Props) {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    appendDots: (dots: any) => {
+      return (
+        <Slick>
+          <ul>{dots}</ul>
+        </Slick>
+      );
+    },
+    customPaging: () => <div className="slick-dot-custom" />,
   };
 
   return <Slider {...settings}>{children}</Slider>;
