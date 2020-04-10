@@ -71,7 +71,8 @@ export const Section = styled.div`
     padding: 6.8125rem 0;
 
     .partner-detail-view {
-      margin-left: 11.7rem;
+      margin-left: 10.7rem;
+      width: 50%;
     }
   }
 `;
@@ -257,7 +258,8 @@ export const PartnerDesc = styled.div`
 `;
 
 export const PartnerEnroll = styled.div`
-  margin-left: 19.7rem;
+  padding: 0 6.7rem;
+  
 `;
 
 /**
