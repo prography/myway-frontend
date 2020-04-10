@@ -64,6 +64,16 @@ export const Section = styled.div`
       }
     }
   }
+
+  &#partner-enroll-section {
+    display: flex;
+    background-color: #0a0a32;
+    padding: 6.8125rem 0;
+
+    .partner-detail-view {
+      margin-left: 11.7rem;
+    }
+  }
 `;
 
 /**
@@ -229,4 +239,33 @@ export const EnrollButton = styled(ApplyButton)`
   font-weight: 500;
   padding: 1.007rem 3.469rem;
   border-radius: 35px;
+`;
+
+export const PartnerSectionTitle = styled(SectionTitle)`
+  margin: 0;
+  padding-bottom: 0.7rem;
+  font-size: 2.0rem;
+  font-family: Noto Sans KR Medium;
+`;
+
+export const PartnerDesc = styled.div`
+
+  span {
+    color: #6a6acc;
+    font-size: 1.2rem;
+  }
+`;
+
+export const PartnerEnroll = styled.div`
+  margin-left: 19.7rem;
+`;
+
+/**
+ * 파트너 신청 - 등록하러 가기 버튼
+ */
+export const PartnerEnrollButton = styled(EnrollButton)`
+  background-color: #243d87;
+  padding: 0.895rem 3.469rem;
+  margin-top: 0.62rem;
+  border-radius: 55px;
 `;

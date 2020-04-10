@@ -14,6 +14,10 @@ import {
   ApplyButton,
   Enroll,
   EnrollButton,
+  PartnerSectionTitle,
+  PartnerDesc,
+  PartnerEnroll,
+  PartnerEnrollButton,
 } from './style';
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -131,6 +135,19 @@ const MainPage = () => {
             alt=""
           />
         </div>
+      </Section>
+      <Section id="partner-enroll-section">
+        <div className="partner-detail-view">
+          <PartnerSectionTitle color="light" align="left">
+            파트너 신청하기
+          </PartnerSectionTitle>
+          <PartnerDesc>
+            <span>초기비용 없이! 32인치 벽면 공간 빌려주고 수익 창출 하러가기</span>
+          </PartnerDesc>
+        </div>
+        <PartnerEnroll>
+          <PartnerEnrollButton>등록하러 가기</PartnerEnrollButton>
+        </PartnerEnroll>
       </Section>
       <FloatingBar>
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
