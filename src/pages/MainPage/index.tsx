@@ -12,6 +12,8 @@ import {
   PartnerApply,
   FloatingBar,
   ApplyButton,
+  Enroll,
+  EnrollButton,
 } from './style';
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -32,7 +34,7 @@ const MainPage = () => {
       </PlayerContainer>
       <Section id="slide-section">
         <Container>
-          <SectionTitle>
+          <SectionTitle highlightColor="orange">
             1시간 1000원으로 <br />
             <span className="highlight">강남역 핫한 인스타 카페</span>에 내
             광고가 뜬다면?
@@ -54,7 +56,7 @@ const MainPage = () => {
       </Section>
       <Section id="feature-section">
         <Container>
-          <SectionTitle>
+          <SectionTitle highlightColor="orange">
             지금까지 <span className="highlight">32,500명</span>이 마이웨이를
             이용해서 <br />
             우리 동네에 광고를 하고 있어요!
@@ -92,7 +94,7 @@ const MainPage = () => {
       <Section id="map-section">
         <div></div>
         <div className="map-detail-view">
-          <MapSectionTitle color="light" align="left">
+          <MapSectionTitle color="light" align="left" highlightColor="orange">
             내 광고, 어디에 하면 좋을까요?
             <br />
             <span className="highlight">
@@ -110,7 +112,26 @@ const MainPage = () => {
           </PartnerApply>
         </div>
       </Section>
-      <Section></Section>
+      <Section id="enroll-section">
+        <div className="enroll-detail-view">
+          <SectionTitle align="left">
+            마이웨이를 이용해서
+            <br />
+            <span className="highlight">내 가게를 쉽고 간편하게</span>
+            <br />
+            홍보해 보세요!
+          </SectionTitle>
+          <Enroll>
+            <EnrollButton>광고 등록하기</EnrollButton>
+          </Enroll>
+        </div>
+        <div className="enroll-image">
+          <img
+            src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+            alt=""
+          />
+        </div>
+      </Section>
       <FloatingBar>
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
         <ApplyButton>광고 등록하기</ApplyButton>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 type SectionTitleProps = {
   color?: 'light' | 'dark';
   align?: 'center' | 'left' | 'right';
+  highlightColor?: 'orange';
 };
 
 /**
@@ -39,12 +40,36 @@ export const Section = styled.div`
       padding: 12.1875rem 5.25rem;
     }
   }
+
+  &#enroll-section {
+    display: flex;
+    background-color: #ffffff;
+    width: 100%;
+
+    .enroll-detail-view {
+      width: 40%;
+      padding: 9.5875rem 3.775rem;
+      margin-left: 8.8125rem;
+    }
+
+    .enroll-image {
+      width: 60%;
+
+      img {
+        width: 70%;
+        height: 70%;
+        margin: 6.1875rem 0.725rem;
+        transform: scale(1);
+        object-fit: cover;
+      }
+    }
+  }
 `;
 
 /**
  * 섹션 타이틀 컴포넌트
  */
-export const SectionTitle = styled.h2`
+export const SectionTitle = styled('h2')<SectionTitleProps>`
   font-size: 2.5rem;
   font-family: Noto Sans KR Light;
   font-weight: 300;
@@ -52,14 +77,15 @@ export const SectionTitle = styled.h2`
   letter-spacing: -2.4px;
   margin-bottom: 3.1875rem;
   line-height: 1.5;
-  text-align: ${(props: SectionTitleProps) => props.align || 'center'};
-  color: ${(props: SectionTitleProps) =>
+  text-align: ${(props) => props.align || 'center'};
+  color: ${(props) =>
     props.color === 'light' ? '#fff' : '#101010'};
 
   /* 색상 하이라이트  */
   span.highlight {
     font-family: Noto Sans KR Medium;
-    color: ${(props) => props.theme.palette.mainColor};
+    color: ${(props) => 
+      props.highlightColor === 'orange' && props.theme.palette.mainColor};
   }
 `;
 
@@ -189,4 +215,18 @@ export const PartnerApply = styled.div`
       margin-right: 5px;
     }
   }
+`;
+
+export const Enroll = styled.div`
+  margin-left: 0.7rem;
+`;
+
+/**
+ * 광고 등록하기 버튼
+ */
+export const EnrollButton = styled(ApplyButton)`
+  font-size: 1.325rem;
+  font-weight: 500;
+  padding: 1.007rem 3.469rem;
+  border-radius: 35px;
 `;
