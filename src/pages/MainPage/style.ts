@@ -3,7 +3,6 @@ import styled from 'styled-components';
 type SectionTitleProps = {
   color?: 'light' | 'dark';
   align?: 'center' | 'left' | 'right';
-  highlightColor?: 'orange';
 };
 
 /**
@@ -95,8 +94,6 @@ export const SectionTitle = styled('h2')<SectionTitleProps>`
   /* 색상 하이라이트  */
   span.highlight {
     font-family: Noto Sans KR Medium;
-    color: ${(props) => 
-      props.highlightColor === 'orange' && props.theme.palette.mainColor};
   }
 `;
 

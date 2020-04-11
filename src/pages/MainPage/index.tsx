@@ -19,6 +19,7 @@ import {
   PartnerEnroll,
   PartnerEnrollButton,
 } from './style';
+import '../../styles/color.css';
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Icon1 from 'assets/images/icon_1.png';
@@ -38,9 +39,9 @@ const MainPage = () => {
       </PlayerContainer>
       <Section id="slide-section">
         <Container>
-          <SectionTitle highlightColor="orange">
+          <SectionTitle>
             1시간 1000원으로 <br />
-            <span className="highlight">강남역 핫한 인스타 카페</span>에 내
+            <span className="highlight orange">강남역 핫한 인스타 카페</span>에 내
             광고가 뜬다면?
           </SectionTitle>
           <SliderViewer>
@@ -60,8 +61,8 @@ const MainPage = () => {
       </Section>
       <Section id="feature-section">
         <Container>
-          <SectionTitle highlightColor="orange">
-            지금까지 <span className="highlight">32,500명</span>이 마이웨이를
+          <SectionTitle>
+            지금까지 <span className="highlight orange">32,500명</span>이 마이웨이를
             이용해서 <br />
             우리 동네에 광고를 하고 있어요!
           </SectionTitle>
@@ -98,10 +99,10 @@ const MainPage = () => {
       <Section id="map-section">
         <div></div>
         <div className="map-detail-view">
-          <MapSectionTitle color="light" align="left" highlightColor="orange">
+          <MapSectionTitle color="light" align="left">
             내 광고, 어디에 하면 좋을까요?
             <br />
-            <span className="highlight">
+            <span className="highlight orange">
               지금 바로 광고가 가능한
               <br />
               우리 동네 가게
