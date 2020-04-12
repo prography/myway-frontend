@@ -87,8 +87,8 @@ export const SectionTitle = styled('h2')<SectionTitleProps>`
   letter-spacing: -2.4px;
   margin-bottom: 3.1875rem;
   line-height: 1.5;
-  text-align: ${(props) => props.align || 'center'};
-  color: ${(props) =>
+  text-align: ${props => props.align || 'center'};
+  color: ${props =>
     props.color === 'light' ? '#fff' : '#101010'};
 
   /* 색상 하이라이트  */
