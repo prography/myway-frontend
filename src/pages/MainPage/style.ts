@@ -41,25 +41,43 @@ export const Section = styled.div`
   }
 
   &#enroll-section {
-    display: flex;
     background-color: #ffffff;
     width: 100%;
+    padding: 19.625rem 0;
 
-    .enroll-detail-view {
-      width: 40%;
-      padding: 9.5875rem 3.775rem;
-      margin-left: 8.8125rem;
-    }
+    .enroll-view {
+      display: flex;
+      justify-content: space-between;
 
-    .enroll-image {
-      width: 60%;
-
-      img {
-        width: 70%;
-        height: 70%;
-        margin: 6.1875rem 0.725rem;
-        transform: scale(1);
-        object-fit: cover;
+      .enroll-image {
+        position: relative;
+        width: 50%;
+        padding-bottom: 44%;
+        top: -64px;
+      
+        .enroll-pic {
+          width: 100%;
+          height: 100%;
+          top: -45px;
+          right: 60px;
+          z-index: 1;
+          position: absolute;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+            object-fit: cover;
+          }
+        }
+        .shadow {
+          position: absolute;
+          width: 64.8%;
+          height: 100%;
+          right: 0;
+          bottom: 0;
+          background-color: #f2f2f2;
+        }
       }
     }
   }
@@ -67,11 +85,15 @@ export const Section = styled.div`
   &#partner-enroll-section {
     display: flex;
     background-color: #0a0a32;
-    padding: 6.8125rem 0;
 
-    .partner-detail-view {
-      margin-left: 10.7rem;
-      width: 50%;
+    .partner-view {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3.2rem;
+
+      .partner-detail-view {
+        width: 50%;
+      }
     }
   }
 `;
@@ -225,10 +247,6 @@ export const PartnerApply = styled.div`
   }
 `;
 
-export const Enroll = styled.div`
-  margin-left: 0.7rem;
-`;
-
 /**
  * 광고 등록하기 버튼
  */
@@ -254,17 +272,12 @@ export const PartnerDesc = styled.div`
   }
 `;
 
-export const PartnerEnroll = styled.div`
-  padding: 0 6.7rem;
-  
-`;
 
 /**
  * 파트너 신청 - 등록하러 가기 버튼
  */
 export const PartnerEnrollButton = styled(EnrollButton)`
   background-color: #243d87;
-  padding: 0.895rem 3.469rem;
   margin-top: 0.62rem;
   border-radius: 55px;
 `;

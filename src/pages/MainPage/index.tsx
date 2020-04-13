@@ -12,11 +12,9 @@ import {
   PartnerApply,
   FloatingBar,
   ApplyButton,
-  Enroll,
   EnrollButton,
   PartnerSectionTitle,
   PartnerDesc,
-  PartnerEnroll,
   PartnerEnrollButton,
 } from './style';
 import 'styles/color.css';
@@ -118,37 +116,46 @@ const MainPage = () => {
         </div>
       </Section>
       <Section id="enroll-section">
-        <div className="enroll-detail-view">
-          <SectionTitle align="left">
-            마이웨이를 이용해서
-            <br />
-            <span className="highlight">내 가게를 쉽고 간편하게</span>
-            <br />
-            홍보해 보세요!
-          </SectionTitle>
-          <Enroll>
-            <EnrollButton>광고 등록하기</EnrollButton>
-          </Enroll>
-        </div>
-        <div className="enroll-image">
-          <img
-            src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt=""
-          />
-        </div>
+        <Container>
+          <div className="enroll-view">
+            <div className="enroll-detail-view">
+              <SectionTitle align="left">
+                마이웨이를 이용해서
+                <br />
+                <span className="highlight">내 가게를 쉽고 간편하게</span>
+                <br />
+                홍보해 보세요!
+              </SectionTitle>
+              <EnrollButton>광고 등록하기</EnrollButton>
+            </div>
+            <div className="enroll-image">
+              <div className="enroll-pic">
+                <img
+                  src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+                  alt=""
+                />
+              </div>
+              <div className="shadow"></div>
+            </div>
+          </div>
+        </Container>
       </Section>
       <Section id="partner-enroll-section">
-        <div className="partner-detail-view">
-          <PartnerSectionTitle color="light" align="left">
-            파트너 신청하기
-          </PartnerSectionTitle>
-          <PartnerDesc>
-            <span>초기비용 없이! 32인치 벽면 공간 빌려주고 수익 창출 하러가기</span>
-          </PartnerDesc>
-        </div>
-        <PartnerEnroll>
-          <PartnerEnrollButton>등록하러 가기</PartnerEnrollButton>
-        </PartnerEnroll>
+        <Container>
+          <div className="partner-view">
+            <div className="partner-detail-view">
+              <PartnerSectionTitle color="light" align="left">
+                파트너 신청하기
+              </PartnerSectionTitle>
+              <PartnerDesc>
+                <span>초기비용 없이! 32인치 벽면 공간 빌려주고 수익 창출 하러가기</span>
+              </PartnerDesc>
+            </div>
+            <div>
+              <PartnerEnrollButton>등록하러 가기</PartnerEnrollButton>
+            </div>
+          </div>
+        </Container>
       </Section>
       <FloatingBar>
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
