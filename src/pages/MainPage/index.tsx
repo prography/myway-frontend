@@ -17,7 +17,6 @@ import {
   PartnerDesc,
   PartnerEnrollButton,
 } from './style';
-import 'styles/color.css';
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Icon1 from 'assets/images/icon_1.png';
