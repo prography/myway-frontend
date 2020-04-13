@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 
 import 'styles/fonts/fonts.css';
 import 'styles/reset.css';
+import 'styles/color.css';
 
 ReactDOM.render(
   <ThemeProvider theme={Theme}>

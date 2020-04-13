@@ -39,12 +39,69 @@ export const Section = styled.div`
       padding: 12.1875rem 5.25rem;
     }
   }
+
+  &#enroll-section {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 19.625rem 0;
+
+    .enroll-view {
+      display: flex;
+      justify-content: space-between;
+
+      .enroll-image {
+        position: relative;
+        width: 50%;
+        padding-bottom: 44%;
+        top: -64px;
+      
+        .enroll-pic {
+          width: 100%;
+          height: 100%;
+          top: -45px;
+          right: 60px;
+          z-index: 1;
+          position: absolute;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+            object-fit: cover;
+          }
+        }
+        .shadow {
+          position: absolute;
+          width: 64.8%;
+          height: 100%;
+          right: 0;
+          bottom: 0;
+          background-color: #f2f2f2;
+        }
+      }
+    }
+  }
+
+  &#partner-enroll-section {
+    display: flex;
+    background-color: #0a0a32;
+
+    .partner-view {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3.2rem;
+
+      .partner-detail-view {
+        width: 50%;
+      }
+    }
+  }
 `;
 
 /**
  * 섹션 타이틀 컴포넌트
  */
-export const SectionTitle = styled.h2`
+export const SectionTitle = styled('h2')<SectionTitleProps>`
   font-size: 2.5rem;
   font-family: Noto Sans KR Light;
   font-weight: 300;
@@ -52,14 +109,13 @@ export const SectionTitle = styled.h2`
   letter-spacing: -2.4px;
   margin-bottom: 3.1875rem;
   line-height: 1.5;
-  text-align: ${(props: SectionTitleProps) => props.align || 'center'};
-  color: ${(props: SectionTitleProps) =>
+  text-align: ${props => props.align || 'center'};
+  color: ${props =>
     props.color === 'light' ? '#fff' : '#101010'};
 
   /* 색상 하이라이트  */
   span.highlight {
     font-family: Noto Sans KR Medium;
-    color: ${(props) => props.theme.palette.mainColor};
   }
 `;
 
@@ -189,4 +245,39 @@ export const PartnerApply = styled.div`
       margin-right: 5px;
     }
   }
+`;
+
+/**
+ * 광고 등록하기 버튼
+ */
+export const EnrollButton = styled(ApplyButton)`
+  font-size: 1.325rem;
+  font-weight: 500;
+  padding: 1.007rem 3.469rem;
+  border-radius: 35px;
+`;
+
+export const PartnerSectionTitle = styled(SectionTitle)`
+  margin: 0;
+  padding-bottom: 0.7rem;
+  font-size: 2.0rem;
+  font-family: Noto Sans KR Medium;
+`;
+
+export const PartnerDesc = styled.div`
+
+  span {
+    color: #6a6acc;
+    font-size: 1.2rem;
+  }
+`;
+
+
+/**
+ * 파트너 신청 - 등록하러 가기 버튼
+ */
+export const PartnerEnrollButton = styled(EnrollButton)`
+  background-color: #243d87;
+  margin-top: 0.62rem;
+  border-radius: 55px;
 `;
