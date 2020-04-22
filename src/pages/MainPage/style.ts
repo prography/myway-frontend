@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import mainImage from 'assets/images/img_main.jpg';
 
 type SectionTitleProps = {
   color?: 'light' | 'dark';
@@ -6,11 +7,34 @@ type SectionTitleProps = {
 };
 
 /**
+ * Spin 애니메이션
+ */
+const SpinAnimation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+`;
+
+/**
  * 섹션 컴포넌트
  */
 export const Section = styled.div`
   width: 100%;
   padding: 8.8125rem 0;
+
+  &#main-section {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background: url(${mainImage}) center no-repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
   &#slide-section {
     background-color: #ffffff;
@@ -43,40 +67,52 @@ export const Section = styled.div`
   &#enroll-section {
     background-color: #ffffff;
     width: 100%;
-    padding: 19.625rem 0;
+    padding: 13.125rem 0;
 
-    .enroll-view {
+    & > div {
       display: flex;
+      align-items: center;
       justify-content: space-between;
+    }
 
-      .enroll-image {
-        position: relative;
-        width: 50%;
-        padding-bottom: 44%;
-        top: -64px;
-      
-        .enroll-pic {
+    .enroll-image {
+      position: relative;
+      width: 60%;
+      padding-bottom: 44%;
+
+      .enroll-pic {
+        height: 100%;
+        z-index: 1;
+        position: absolute;
+
+        img {
           width: 100%;
           height: 100%;
-          top: -45px;
-          right: 60px;
-          z-index: 1;
-          position: absolute;
-          
-          img {
-            width: 100%;
-            height: 100%;
-            transform: scale(1);
-            object-fit: cover;
-          }
+          transform: scale(1);
+          object-fit: cover;
         }
-        .shadow {
-          position: absolute;
-          width: 64.8%;
-          height: 100%;
-          right: 0;
-          bottom: 0;
-          background-color: #f2f2f2;
+      }
+
+      .shadow {
+        position: absolute;
+        width: 64.8%;
+        height: 100%;
+        right: -50px;
+        top: 40px;
+        background-color: #f2f2f2;
+      }
+
+      .spin-image {
+        position: absolute;
+        top: -90px;
+        left: -100px;
+
+        img {
+          width: 240px;
+          height: 240px;
+          animation: ${SpinAnimation} 12s linear;
+          animation-iteration-count: infinite;
+          transform-origin: 50% 50%;
         }
       }
     }
@@ -109,9 +145,8 @@ export const SectionTitle = styled('h2')<SectionTitleProps>`
   letter-spacing: -2.4px;
   margin-bottom: 3.1875rem;
   line-height: 1.5;
-  text-align: ${props => props.align || 'center'};
-  color: ${props =>
-    props.color === 'light' ? '#fff' : '#101010'};
+  text-align: ${(props) => props.align || 'center'};
+  color: ${(props) => (props.color === 'light' ? '#fff' : '#101010')};
 
   /* 색상 하이라이트  */
   span.highlight {
@@ -149,7 +184,7 @@ export const FloatingBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #232328;
+  background-color: rgba(35, 35, 40, 0.9);
 
   p {
     color: #fff;
@@ -260,18 +295,16 @@ export const EnrollButton = styled(ApplyButton)`
 export const PartnerSectionTitle = styled(SectionTitle)`
   margin: 0;
   padding-bottom: 0.7rem;
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-family: Noto Sans KR Medium;
 `;
 
 export const PartnerDesc = styled.div`
-
   span {
     color: #6a6acc;
     font-size: 1.2rem;
   }
 `;
-
 
 /**
  * 파트너 신청 - 등록하러 가기 버튼

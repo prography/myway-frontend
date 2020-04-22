@@ -23,35 +23,45 @@ import Icon1 from 'assets/images/icon_1.png';
 import Icon2 from 'assets/images/icon_2.png';
 import Icon3 from 'assets/images/icon_3.png';
 
+import SlideImage from 'assets/images/img_01.jpg';
+import Sec5Image from 'assets/images/sec5-img.jpg';
+import SpinCopl from 'assets/images/spin-copl.png';
+
 const MainPage = () => {
   return (
     <>
-      <PlayerContainer>
-        <iframe
-          title="player"
-          id="projectplayer"
-          frameBorder="0"
-          src="https://player.vimeo.com/video/377707179?api=1&amp;background=1&amp;mute=1&amp;loop=1&amp;autoplay=1"
-        />
-      </PlayerContainer>
+      <Section id="main-section">
+        <Container>
+          <SectionTitle align="left" color="light">
+            나만을 위한 광고,
+            <br /> 지금 바로 등록해보세요
+            <br /> COPL에서 빠르고 간편하게
+          </SectionTitle>
+        </Container>
+      </Section>
       <Section id="slide-section">
         <Container>
           <SectionTitle>
             1시간 1000원으로 <br />
-            <span className="highlight text-orange">강남역 핫한 인스타 카페</span>에 내
-            광고가 뜬다면?
+            <span className="highlight text-orange">
+              강남역 핫한 인스타 카페
+            </span>
+            에 내 광고가 뜬다면?
           </SectionTitle>
           <SliderViewer>
             <Slide>
               <div className="slide-image">
-                <img
-                  src="https://images.unsplash.com/photo-1541173109020-9c5d8a48e169?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1299&q=80"
-                  alt=""
-                />
+                <img src={SlideImage} alt="slide_1" />
               </div>
-              <div className="slide-image"></div>
-              <div className="slide-image"></div>
-              <div className="slide-image"></div>
+              <div className="slide-image">
+                <img src={SlideImage} alt="slide_2" />
+              </div>
+              <div className="slide-image">
+                <img src={SlideImage} alt="slide_3" />
+              </div>
+              <div className="slide-image">
+                <img src={SlideImage} alt="slide_4" />
+              </div>
             </Slide>
           </SliderViewer>
         </Container>
@@ -59,8 +69,8 @@ const MainPage = () => {
       <Section id="feature-section">
         <Container>
           <SectionTitle>
-            지금까지 <span className="highlight text-orange">32,500명</span>이 마이웨이를
-            이용해서 <br />
+            지금까지 <span className="highlight text-orange">32,500명</span>이
+            마이웨이를 이용해서 <br />
             우리 동네에 광고를 하고 있어요!
           </SectionTitle>
           <FeatureWrap>
@@ -116,26 +126,24 @@ const MainPage = () => {
       </Section>
       <Section id="enroll-section">
         <Container>
-          <div className="enroll-view">
-            <div className="enroll-detail-view">
-              <SectionTitle align="left">
-                마이웨이를 이용해서
-                <br />
-                <span className="highlight">내 가게를 쉽고 간편하게</span>
-                <br />
-                홍보해 보세요!
-              </SectionTitle>
-              <EnrollButton>광고 등록하기</EnrollButton>
+          <div className="enroll-detail-view">
+            <SectionTitle align="left">
+              마이웨이를 이용해서
+              <br />
+              <span className="highlight">내 가게를 쉽고 간편하게</span>
+              <br />
+              홍보해 보세요!
+            </SectionTitle>
+            <EnrollButton>광고 등록하기</EnrollButton>
+          </div>
+          <div className="enroll-image">
+            <div className="enroll-pic">
+              <img src={Sec5Image} alt="sec5-img" />
             </div>
-            <div className="enroll-image">
-              <div className="enroll-pic">
-                <img
-                  src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-                  alt=""
-                />
-              </div>
-              <div className="shadow"></div>
+            <div className="spin-image">
+              <img src={SpinCopl} alt="spin-copl" />
             </div>
+            <div className="shadow" />
           </div>
         </Container>
       </Section>
@@ -147,7 +155,9 @@ const MainPage = () => {
                 파트너 신청하기
               </PartnerSectionTitle>
               <PartnerDesc>
-                <span>초기비용 없이! 32인치 벽면 공간 빌려주고 수익 창출 하러가기</span>
+                <span>
+                  초기비용 없이! 32인치 벽면 공간 빌려주고 수익 창출 하러가기
+                </span>
               </PartnerDesc>
             </div>
             <div>
