@@ -22,7 +22,6 @@ const Slick = styled.div`
         height: 7px;
         border-radius: 3.5px;
         background-color: #dddddd;
-        transition: width 0.2s;
       }
 
       &.slick-active div {
