@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-const Map = () => {
+const NaverMap = () => {
   const { naver } = window;
   
   useEffect(() => {
@@ -49,13 +49,11 @@ const Map = () => {
   }, []);
 
   return (
-    <>
-      <MapContainer id="map" />
-    </>
+    <MapContainer id="map" />
   );
 }
 
-export default Map;
+export default NaverMap;
 
 const MapContainer = styled.div`
   width: 100%;

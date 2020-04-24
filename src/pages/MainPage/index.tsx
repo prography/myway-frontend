@@ -27,7 +27,7 @@ import SlideImage from 'assets/images/img_01.jpg';
 import Sec5Image from 'assets/images/sec5-img.jpg';
 import SpinCopl from 'assets/images/spin-copl.png';
 
-import Map from './Map';
+import NaverMap from './NaverMap';
 
 const MainPage = () => {
   return (
@@ -107,7 +107,7 @@ const MainPage = () => {
       </Section>
       <Section id="map-section">
         <div>
-          <Map />
+          <NaverMap />
         </div>
         <div className="map-detail-view">
           <MapSectionTitle color="light" align="left">
