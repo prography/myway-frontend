@@ -38,9 +38,14 @@ const Map = () => {
       map,
     });
 
-    naver.maps.Event.addListener(map, 'click', function(e : any) {
+    const handleClickMap = (e: any) => {
       marker.setPosition(e.coord);
-    });
+    }
+    naver.maps.Event.addListener(map, 'click', handleClickMap);
+
+    return () => {
+      naver.maps.Event.removeListener(map, 'click', handleClickMap);
+    }
   }, []);
 
   return (
