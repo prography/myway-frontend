@@ -1,12 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-declare global {
-  interface Window {
-    naver: any; 
-  }
-}
-
 const NaverMap = () => {
   const { naver } = window;
   

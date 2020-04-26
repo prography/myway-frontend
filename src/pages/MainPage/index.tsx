@@ -27,7 +27,7 @@ import SlideImage from 'assets/images/img_01.jpg';
 import Sec5Image from 'assets/images/sec5-img.jpg';
 import SpinCopl from 'assets/images/spin-copl.png';
 
-import NaverMap from './NaverMap';
+import NaverMap from 'components/NaverMap';
 
 const MainPage = () => {
   return (
