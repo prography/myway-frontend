@@ -40,7 +40,7 @@ const NaverMap = () => {
     return () => {
       naver.maps.Event.removeListener(map, 'click', handleClickMap);
     }
-  }, []);
+  }, [naver]);
 
   return (
     <MapContainer id="map" />
