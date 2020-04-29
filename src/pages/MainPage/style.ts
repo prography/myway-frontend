@@ -155,24 +155,6 @@ export const SectionTitle = styled('h2')<SectionTitleProps>`
 `;
 
 /**
- * 동영상 플레이어 컨테이너
- */
-export const PlayerContainer = styled.div`
-  position: relative;
-  padding-bottom: 56.25%;
-  max-width: 100%;
-  border-bottom: 1px solid #efefef;
-
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-/**
  * 하단 고정 바
  */
 export const FloatingBar = styled.div`

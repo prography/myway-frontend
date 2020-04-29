@@ -3,7 +3,6 @@ import { LayoutHOC } from 'components/Layout';
 import Container from 'components/Layout/Container';
 import Slide from 'components/Slide';
 import {
-  PlayerContainer,
   Section,
   SectionTitle,
   SliderViewer,
