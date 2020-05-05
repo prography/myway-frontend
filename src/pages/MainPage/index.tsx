@@ -29,15 +29,11 @@ import SpinCopl from 'assets/images/spin-copl.png';
 
 import NaverMap from 'components/NaverMap';
 
-import { getPartners } from 'store/partner/action';
+import usePartner from 'hooks/usePartner';
 
 const MainPage = () => {
-  const dispatch = useDispatch();
-  const partners = useSelector((state: StoreState) => state.partner.items);
 
-  useEffect(() => {
-    dispatch(getPartners());
-  }, []);
+  const partners = usePartner();
 
   return (
     <>
