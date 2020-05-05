@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Partner } from 'models/partner';
 
 export type NaverMapProps = {
-  place: Partner[];
+  placeList: Partner[];
 }
-const NaverMap: FC<NaverMapProps> = ({ place }) => {
+const NaverMap: FC<NaverMapProps> = ({ placeList }) => {
   const { naver } = window;
   
   useEffect(() => {
@@ -36,28 +36,28 @@ const NaverMap: FC<NaverMapProps> = ({ place }) => {
       console.log(e.overlay.title);
     }
 
-    { place && place.map(m => {
+    { placeList.length && placeList.map(place => {
       naver.maps.Event.addListener(
         new naver.maps.Marker({
-          position: new naver.maps.LatLng(m.lat, m.lng),
+          position: new naver.maps.LatLng(place.lat, place.lng),
           map,
-          title: m,
+          title: place,
         }), 'click', handleClickMarker);
       });
     }
 
     return () => {
-      { place && place.map(m => {
+      { placeList.length && placeList.map(place => {
         naver.maps.Event.removeListener(
           new naver.maps.Marker({
-            position: new naver.maps.LatLng(m.lat, m.lng),
+            position: new naver.maps.LatLng(place.lat, place.lng),
             map,
-            title: m,
+            title: place,
           }), 'click', handleClickMarker);
         });
       }
     }
-  }, [place]);
+  }, [placeList]);
 
   return (
     <MapContainer id="map" />

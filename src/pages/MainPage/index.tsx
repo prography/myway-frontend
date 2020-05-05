@@ -117,7 +117,7 @@ const MainPage = () => {
       <Section id="map-section">
         <div>
           <NaverMap 
-            place={partners}  
+            placeList={partners}  
           />
         </div>
         <div className="map-detail-view">
