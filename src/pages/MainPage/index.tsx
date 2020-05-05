@@ -112,9 +112,11 @@ const MainPage = () => {
       </Section>
       <Section id="map-section">
         <div>
-          <NaverMap 
-            placeList={partners}  
-          />
+          {partners.length && 
+            <NaverMap
+              placeList={partners}  
+            />
+          }
         </div>
         <div className="map-detail-view">
           <MapSectionTitle color="light" align="left">
