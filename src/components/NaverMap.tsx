@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
+import { Partner } from 'models/partner';
 
-const NaverMap = () => {
+export type NaverMapProps = {
+  placeList: Partner[];
+}
+const NaverMap: FC<NaverMapProps> = ({ placeList }) => {
   const { naver } = window;
   
   useEffect(() => {
@@ -27,20 +31,33 @@ const NaverMap = () => {
 
     const map = new naver.maps.Map(container, mapOptions);
 
-    const marker = new naver.maps.Marker({
-      position: mapOptions.center,
-      map,
-    });
-
-    const handleClickMap = (e: any) => {
-      marker.setPosition(e.coord);
+    const handleClickMarker = (e: any) => {
+      console.log(e);
+      console.log(e.overlay.title);
     }
-    naver.maps.Event.addListener(map, 'click', handleClickMap);
+
+    { placeList.length && placeList.map(place => {
+      naver.maps.Event.addListener(
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(place.lat, place.lng),
+          map,
+          title: place,
+        }), 'click', handleClickMarker);
+      });
+    }
 
     return () => {
-      naver.maps.Event.removeListener(map, 'click', handleClickMap);
+      { placeList.length && placeList.map(place => {
+        naver.maps.Event.removeListener(
+          new naver.maps.Marker({
+            position: new naver.maps.LatLng(place.lat, place.lng),
+            map,
+            title: place,
+          }), 'click', handleClickMarker);
+        });
+      }
     }
-  }, [naver]);
+  }, [placeList]);
 
   return (
     <MapContainer id="map" />

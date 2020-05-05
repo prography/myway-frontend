@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import State from 'store';
+import rootSaga from 'saga';
 
 const sagaMiddleware = createSagaMiddleware();
 const cs = () => {
@@ -9,8 +10,7 @@ const cs = () => {
   const middlewares = applyMiddleware(sagaMiddleware);
 
   const store = createStore(State, composeEnhancers(middlewares));
-  // TODO: API 생기면 데이터 가져오는 saga 등록해야함
-  // sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
 
   return store;
 };

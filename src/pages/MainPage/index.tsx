@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { LayoutHOC } from 'components/Layout';
 import Container from 'components/Layout/Container';
 import Slide from 'components/Slide';
@@ -28,7 +29,12 @@ import SpinCopl from 'assets/images/spin-copl.png';
 
 import NaverMap from 'components/NaverMap';
 
+import usePartner from 'hooks/usePartner';
+
 const MainPage = () => {
+
+  const partners = usePartner();
+
   return (
     <>
       <Section id="main-section">
@@ -106,7 +112,11 @@ const MainPage = () => {
       </Section>
       <Section id="map-section">
         <div>
-          <NaverMap />
+          {partners.length && 
+            <NaverMap
+              placeList={partners}  
+            />
+          }
         </div>
         <div className="map-detail-view">
           <MapSectionTitle color="light" align="left">

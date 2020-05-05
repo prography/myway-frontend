@@ -8,7 +8,7 @@ export const createAction = <P, Type extends string = string>(type: Type) => {
       payload,
     };
   }
-
+  fn.type = type;
   return fn;
 };
 
