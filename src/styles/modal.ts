@@ -8,7 +8,8 @@ export const useStyles = makeStyles({
     backgroundColor: '#ed4614',
     color: 'white',
     "&:hover": {
-      transform: 'scale(1.05)'
+      backgroundColor: '#ed4614',
+      transform: 'scale(1.05)',
     },
   },
   title: {
