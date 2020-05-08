@@ -16,10 +16,10 @@ function* watchGetPartners() {
 }
 
 function* watchApplyPartner() {
-    while (true) {
-      const { params }: ApplyPartner = yield take(APPLY_PARTNER);
-      yield call(fetchApplyPartner, params);
-    }
+  while (true) {
+    const { params }: ApplyPartner = yield take(APPLY_PARTNER);
+    yield call(fetchApplyPartner, params);
+  }
 }
 
 export default function* partnerSaga() {
