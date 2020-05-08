@@ -5,7 +5,7 @@ import { getPartners } from 'store/partner/action';
 
 const usePartner = () => {
   const dispatch = useDispatch();
-  const partners = useSelector((state: StoreState) => state.partner.items);
+  const partners = useSelector((state: StoreState) => state.partner.partners.items);
 
   const getData = useCallback(() => {
     dispatch(getPartners())

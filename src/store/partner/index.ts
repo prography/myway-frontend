@@ -1,17 +1,22 @@
 import { produce } from 'immer';
+import { combineReducers } from 'redux';
 import { Partner } from 'models/partner';
 
 export type PartnerState = {
-  status: string;
-  items: Partner[];
+  partners: {
+    status: string;
+    items: Partner[];
+  },
 };
 
 const initialState: PartnerState = {
-  status: 'INIT',
-  items: [],
+  partners: {
+    status: 'INIT',
+    items: [],
+  },
 };
 
-const partnerReducer = (state: PartnerState = initialState, action: any): PartnerState => {
+const partnerReducer = (state: PartnerState['partners'] = initialState.partners, action: any): PartnerState['partners'] => {
   return produce(state, (draft) => {
     switch (action.type) {
       case 'GET_PARTNERS_REQUEST':
@@ -30,4 +35,6 @@ const partnerReducer = (state: PartnerState = initialState, action: any): Partne
   });
 };
 
-export default partnerReducer;
+export default combineReducers({
+  partners: partnerReducer,
+});
