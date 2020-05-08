@@ -19,4 +19,4 @@ export const applyPartner = (params: partnerApi.ApplyPartnerParams) => ({
 });
 
 export type GetPartners = ReturnType<typeof getPartners>;
-export type ApplyPartners = ReturnType<typeof applyPartner>;
+export type ApplyPartner = ReturnType<typeof applyPartner>;
