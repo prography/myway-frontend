@@ -7,6 +7,9 @@ export const useStyles = makeStyles({
   fab: {
     backgroundColor: '#ed4614',
     color: 'white',
+    "&:hover": {
+      transform: 'scale(1.05)'
+    },
   },
   title: {
     width: '600px',
@@ -14,10 +17,10 @@ export const useStyles = makeStyles({
       fontSize: '1.5rem',
       fontWeight: '700',
       fontFamily: 'Noto Sans KR Light',
-    }
+    },
   },
   textField: {
-    "& .Mui-focused ": {
+    "& .Mui-focused": {
       color: '#ed4614',
     },
     "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
