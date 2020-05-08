@@ -296,3 +296,10 @@ export const PartnerEnrollButton = styled(EnrollButton)`
   margin-top: 0.62rem;
   border-radius: 55px;
 `;
+
+export const ModalContainer = styled.div`
+  position: fixed;
+  right: 15px;
+  bottom: 100px;
+  z-index: 10;
+`;

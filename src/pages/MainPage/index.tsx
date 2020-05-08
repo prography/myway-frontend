@@ -16,6 +16,7 @@ import {
   PartnerSectionTitle,
   PartnerDesc,
   PartnerEnrollButton,
+  ModalContainer,
 } from './style';
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -28,6 +29,7 @@ import Sec5Image from 'assets/images/sec5-img.jpg';
 import SpinCopl from 'assets/images/spin-copl.png';
 
 import NaverMap from 'components/NaverMap';
+import Modal from 'components/Modal';
 
 import usePartner from 'hooks/usePartner';
 
@@ -183,6 +185,9 @@ const MainPage = () => {
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
         <ApplyButton>광고 등록하기</ApplyButton>
       </FloatingBar>
+      <ModalContainer>
+        <Modal />
+      </ModalContainer>
     </>
   );
 };
