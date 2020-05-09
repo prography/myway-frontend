@@ -251,10 +251,11 @@ export const PartnerApply = styled.div`
     color: #85859c;
   }
 
-  a {
+  div {
     display: flex;
     align-items: center;
     color: #ffffff;
+    cursor: pointer;
 
     span {
       font-size: 1.375rem;
@@ -295,11 +296,4 @@ export const PartnerEnrollButton = styled(EnrollButton)`
   background-color: #243d87;
   margin-top: 0.62rem;
   border-radius: 55px;
-`;
-
-export const ModalContainer = styled.div`
-  position: fixed;
-  right: 15px;
-  bottom: 100px;
-  z-index: 10;
 `;

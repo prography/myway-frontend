@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LayoutHOC } from 'components/Layout';
 import Container from 'components/Layout/Container';
@@ -16,7 +16,6 @@ import {
   PartnerSectionTitle,
   PartnerDesc,
   PartnerEnrollButton,
-  ModalContainer,
 } from './style';
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -36,6 +35,14 @@ import usePartner from 'hooks/usePartner';
 const MainPage = () => {
 
   const partners = usePartner();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -133,9 +140,9 @@ const MainPage = () => {
           </MapSectionTitle>
           <PartnerApply>
             <span>내 가게가 안 보이나요?</span>
-            <a href="#">
-              <span>파트너 신청하기</span> <ArrowForwardIcon />
-            </a>
+            <div>
+              <span onClick={handleOpen}>파트너 신청하기</span> <ArrowForwardIcon />
+            </div>
           </PartnerApply>
         </div>
       </Section>
@@ -176,7 +183,7 @@ const MainPage = () => {
               </PartnerDesc>
             </div>
             <div>
-              <PartnerEnrollButton>등록하러 가기</PartnerEnrollButton>
+              <PartnerEnrollButton onClick={handleOpen}>등록하러 가기</PartnerEnrollButton>
             </div>
           </div>
         </Container>
@@ -185,9 +192,7 @@ const MainPage = () => {
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
         <ApplyButton>광고 등록하기</ApplyButton>
       </FloatingBar>
-      <ModalContainer>
-        <Modal />
-      </ModalContainer>
+      <Modal open={open} onClose={handleClose} />
     </>
   );
 };
