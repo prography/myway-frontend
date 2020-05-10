@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LayoutHOC } from 'components/Layout';
 import Container from 'components/Layout/Container';
@@ -28,12 +28,22 @@ import Sec5Image from 'assets/images/sec5-img.jpg';
 import SpinCopl from 'assets/images/spin-copl.png';
 
 import NaverMap from 'components/NaverMap';
+import PartnerApplyModal from 'components/PartnerApplyModal';
 
 import usePartner from 'hooks/usePartner';
 
 const MainPage = () => {
 
   const partners = usePartner();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -131,9 +141,9 @@ const MainPage = () => {
           </MapSectionTitle>
           <PartnerApply>
             <span>내 가게가 안 보이나요?</span>
-            <a href="#">
+            <div onClick={handleModalOpen}>
               <span>파트너 신청하기</span> <ArrowForwardIcon />
-            </a>
+            </div>
           </PartnerApply>
         </div>
       </Section>
@@ -174,7 +184,7 @@ const MainPage = () => {
               </PartnerDesc>
             </div>
             <div>
-              <PartnerEnrollButton>등록하러 가기</PartnerEnrollButton>
+              <PartnerEnrollButton onClick={handleModalOpen}>등록하러 가기</PartnerEnrollButton>
             </div>
           </div>
         </Container>
@@ -183,6 +193,7 @@ const MainPage = () => {
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
         <ApplyButton>광고 등록하기</ApplyButton>
       </FloatingBar>
+      <PartnerApplyModal open={modalOpen} onClose={handleModalClose} />
     </>
   );
 };

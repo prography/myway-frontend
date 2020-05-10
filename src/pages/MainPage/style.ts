@@ -251,10 +251,11 @@ export const PartnerApply = styled.div`
     color: #85859c;
   }
 
-  a {
+  div {
     display: flex;
     align-items: center;
     color: #ffffff;
+    cursor: pointer;
 
     span {
       font-size: 1.375rem;

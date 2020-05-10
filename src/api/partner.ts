@@ -6,3 +6,17 @@ export const getPartners = async () => {
 
   return data.arr;
 };
+
+export interface ApplyPartnerParams {
+  phone: string;
+  address: string;
+  ownerName: string;
+  storeName: string;
+  content: string;
+};
+
+export const applyPartner = async (params: ApplyPartnerParams) => {
+  const { data } = await axios.post('https://api.copl.kr/apply-partner',  params );
+  
+  return data;
+};
