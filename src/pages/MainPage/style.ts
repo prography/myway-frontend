@@ -60,7 +60,7 @@ export const Section = styled.div`
     }
 
     .map-detail-view {
-      padding: 12.1875rem 5.25rem;
+      padding: 12.1875rem 5.25rem 5.125rem;
     }
   }
 
@@ -245,6 +245,8 @@ export const MapSectionTitle = styled(SectionTitle)`
 `;
 
 export const PartnerApply = styled.div`
+  padding-bottom: 7.1875rem;
+
   & > span {
     display: block;
     font-size: 1.125rem;
