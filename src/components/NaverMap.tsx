@@ -4,10 +4,15 @@ import { Partner } from 'models/partner';
 
 export type NaverMapProps = {
   placeList: Partner[];
-}
-const NaverMap: FC<NaverMapProps> = ({ placeList }) => {
+  setPartner: (partnerData: Partner) => void;
+};
+const NaverMap: FC<NaverMapProps> = ({ placeList, setPartner }) => {
   const { naver } = window;
-  
+
+  const handleClickMarker = (e: any) => {
+    setPartner(e.overlay.title);
+  };
+
   useEffect(() => {
     const container = document.getElementById('map');
     const mapOptions = {
@@ -31,38 +36,37 @@ const NaverMap: FC<NaverMapProps> = ({ placeList }) => {
 
     const map = new naver.maps.Map(container, mapOptions);
 
-    const handleClickMarker = (e: any) => {
-      console.log(e);
-      console.log(e.overlay.title);
-    }
-
-    { placeList.length && placeList.map(place => {
-      naver.maps.Event.addListener(
-        new naver.maps.Marker({
-          position: new naver.maps.LatLng(place.lat, place.lng),
-          map,
-          title: place,
-        }), 'click', handleClickMarker);
-      });
-    }
-
-    return () => {
-      { placeList.length && placeList.map(place => {
-        naver.maps.Event.removeListener(
+    placeList.length &&
+      placeList.map((place) => {
+        naver.maps.Event.addListener(
           new naver.maps.Marker({
             position: new naver.maps.LatLng(place.lat, place.lng),
             map,
             title: place,
-          }), 'click', handleClickMarker);
+          }),
+          'click',
+          handleClickMarker,
+        );
+      });
+
+    return () => {
+      placeList.length &&
+        placeList.map((place) => {
+          naver.maps.Event.removeListener(
+            new naver.maps.Marker({
+              position: new naver.maps.LatLng(place.lat, place.lng),
+              map,
+              title: place,
+            }),
+            'click',
+            handleClickMarker,
+          );
         });
-      }
-    }
+    };
   }, [placeList]);
 
-  return (
-    <MapContainer id="map" />
-  );
-}
+  return <MapContainer id="map" />;
+};
 
 export default NaverMap;
 
