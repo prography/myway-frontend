@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,11 +9,11 @@ import { useDispatch } from 'react-redux';
 import { applyPartner } from 'store/partner/action';
 import { ApplyPartnerParams } from 'api/partner';
 
-export type ModalProps = {
+type Props = {
   open: boolean;
   onClose: () => void;
 }
-const Modal: FC<ModalProps> = ({ open, onClose }) => {
+const PartnerApplyModal: React.FC<Props> = ({ open, onClose }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ const Modal: FC<ModalProps> = ({ open, onClose }) => {
       storeName: applyContent.storeName,
       content: applyContent.content,
     }));
-    window.alert("신청되었습니다 !");
+    window.alert('신청되었습니다 !');
     onClose();
   };
   
@@ -99,4 +99,4 @@ const Modal: FC<ModalProps> = ({ open, onClose }) => {
   );
 }
 
-export default Modal;
+export default PartnerApplyModal;

@@ -28,20 +28,21 @@ import Sec5Image from 'assets/images/sec5-img.jpg';
 import SpinCopl from 'assets/images/spin-copl.png';
 
 import NaverMap from 'components/NaverMap';
-import Modal from 'components/Modal';
+import PartnerApplyModal from 'components/PartnerApplyModal';
 
 import usePartner from 'hooks/usePartner';
 
 const MainPage = () => {
 
   const partners = usePartner();
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  }
-  const handleClose = () => {
-    setOpen(false);
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -140,8 +141,8 @@ const MainPage = () => {
           </MapSectionTitle>
           <PartnerApply>
             <span>내 가게가 안 보이나요?</span>
-            <div>
-              <span onClick={handleOpen}>파트너 신청하기</span> <ArrowForwardIcon />
+            <div onClick={handleModalOpen}>
+              <span>파트너 신청하기</span> <ArrowForwardIcon />
             </div>
           </PartnerApply>
         </div>
@@ -183,7 +184,7 @@ const MainPage = () => {
               </PartnerDesc>
             </div>
             <div>
-              <PartnerEnrollButton onClick={handleOpen}>등록하러 가기</PartnerEnrollButton>
+              <PartnerEnrollButton onClick={handleModalOpen}>등록하러 가기</PartnerEnrollButton>
             </div>
           </div>
         </Container>
@@ -192,7 +193,7 @@ const MainPage = () => {
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
         <ApplyButton>광고 등록하기</ApplyButton>
       </FloatingBar>
-      <Modal open={open} onClose={handleClose} />
+      <PartnerApplyModal open={modalOpen} onClose={handleModalClose} />
     </>
   );
 };
