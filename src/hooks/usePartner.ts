@@ -8,14 +8,14 @@ const usePartner = () => {
   const partners = useSelector((state: StoreState) => state.partner.partners.items);
 
   const getData = useCallback(() => {
-    dispatch(getPartners())
+    dispatch(getPartners());
   }, [dispatch]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   return partners;
-}
+};
 
 export default usePartner;

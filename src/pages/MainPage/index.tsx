@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { LayoutHOC } from 'components/Layout';
 import Container from 'components/Layout/Container';
 import Slide from 'components/Slide';
+import PartnerMapSection from './PartnerMapSection';
 import {
   Section,
   SectionTitle,
   SliderViewer,
   FeatureWrap,
-  MapSectionTitle,
-  PartnerApply,
   FloatingBar,
   ApplyButton,
   EnrollButton,
@@ -18,7 +16,6 @@ import {
   PartnerEnrollButton,
 } from './style';
 
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Icon1 from 'assets/images/icon_1.png';
 import Icon2 from 'assets/images/icon_2.png';
 import Icon3 from 'assets/images/icon_3.png';
@@ -27,14 +24,9 @@ import SlideImage from 'assets/images/img_01.jpg';
 import Sec5Image from 'assets/images/sec5-img.jpg';
 import SpinCopl from 'assets/images/spin-copl.png';
 
-import NaverMap from 'components/NaverMap';
 import PartnerApplyModal from 'components/PartnerApplyModal';
 
-import usePartner from 'hooks/usePartner';
-
 const MainPage = () => {
-
-  const partners = usePartner();
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -120,33 +112,7 @@ const MainPage = () => {
           </FeatureWrap>
         </Container>
       </Section>
-      <Section id="map-section">
-        <div>
-          {partners.length && 
-            <NaverMap
-              placeList={partners}  
-            />
-          }
-        </div>
-        <div className="map-detail-view">
-          <MapSectionTitle color="light" align="left">
-            내 광고, 어디에 하면 좋을까요?
-            <br />
-            <span className="highlight text-orange">
-              지금 바로 광고가 가능한
-              <br />
-              우리 동네 가게
-            </span>
-            를 찾아보세요!
-          </MapSectionTitle>
-          <PartnerApply>
-            <span>내 가게가 안 보이나요?</span>
-            <div onClick={handleModalOpen}>
-              <span>파트너 신청하기</span> <ArrowForwardIcon />
-            </div>
-          </PartnerApply>
-        </div>
-      </Section>
+      <PartnerMapSection onModalOpen={handleModalOpen} />
       <Section id="enroll-section">
         <Container>
           <div className="enroll-detail-view">
@@ -184,7 +150,9 @@ const MainPage = () => {
               </PartnerDesc>
             </div>
             <div>
-              <PartnerEnrollButton onClick={handleModalOpen}>등록하러 가기</PartnerEnrollButton>
+              <PartnerEnrollButton onClick={handleModalOpen}>
+                등록하러 가기
+              </PartnerEnrollButton>
             </div>
           </div>
         </Container>

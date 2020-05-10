@@ -1,13 +1,21 @@
-import React, { FC, useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { Partner } from 'models/partner';
 
 export type NaverMapProps = {
   placeList: Partner[];
-}
-const NaverMap: FC<NaverMapProps> = ({ placeList }) => {
+  setPartner: (partnerData: Partner) => void;
+};
+const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
   const { naver } = window;
-  
+
+  const handleClickMarker = useCallback(
+    (e) => {
+      setPartner(e.overlay.title);
+    },
+    [setPartner],
+  );
+
   useEffect(() => {
     const container = document.getElementById('map');
     const mapOptions = {
@@ -31,38 +39,37 @@ const NaverMap: FC<NaverMapProps> = ({ placeList }) => {
 
     const map = new naver.maps.Map(container, mapOptions);
 
-    const handleClickMarker = (e: any) => {
-      console.log(e);
-      console.log(e.overlay.title);
-    }
-
-    { placeList.length && placeList.map(place => {
-      naver.maps.Event.addListener(
-        new naver.maps.Marker({
-          position: new naver.maps.LatLng(place.lat, place.lng),
-          map,
-          title: place,
-        }), 'click', handleClickMarker);
-      });
-    }
-
-    return () => {
-      { placeList.length && placeList.map(place => {
-        naver.maps.Event.removeListener(
+    placeList.length &&
+      placeList.forEach((place) => {
+        naver.maps.Event.addListener(
           new naver.maps.Marker({
             position: new naver.maps.LatLng(place.lat, place.lng),
             map,
             title: place,
-          }), 'click', handleClickMarker);
-        });
-      }
-    }
-  }, [placeList]);
+          }),
+          'click',
+          handleClickMarker,
+        );
+      });
 
-  return (
-    <MapContainer id="map" />
-  );
-}
+    return () => {
+      placeList.length &&
+        placeList.forEach((place) => {
+          naver.maps.Event.removeListener(
+            new naver.maps.Marker({
+              position: new naver.maps.LatLng(place.lat, place.lng),
+              map,
+              title: place,
+            }),
+            'click',
+            handleClickMarker,
+          );
+        });
+    };
+  }, [placeList, naver]);
+
+  return <MapContainer id="map" />;
+};
 
 export default NaverMap;
 
