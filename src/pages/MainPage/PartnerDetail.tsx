@@ -31,7 +31,7 @@ const PartnerDetail: React.FC<Props> = ({ data }) => {
         </ParnterInfoList>
       </div>
       <div>
-        <img src={TestImage} alt="test image" width={508} />
+        <img src={TestImage} alt="test_image" width={508} />
       </div>
     </PartnerInfoContainer>
   );
