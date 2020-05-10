@@ -37,7 +37,7 @@ const NaverMap: FC<NaverMapProps> = ({ placeList, setPartner }) => {
     const map = new naver.maps.Map(container, mapOptions);
 
     placeList.length &&
-      placeList.map((place) => {
+      placeList.forEach((place) => {
         naver.maps.Event.addListener(
           new naver.maps.Marker({
             position: new naver.maps.LatLng(place.lat, place.lng),
@@ -51,7 +51,7 @@ const NaverMap: FC<NaverMapProps> = ({ placeList, setPartner }) => {
 
     return () => {
       placeList.length &&
-        placeList.map((place) => {
+        placeList.forEach((place) => {
           naver.maps.Event.removeListener(
             new naver.maps.Marker({
               position: new naver.maps.LatLng(place.lat, place.lng),
