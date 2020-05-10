@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { Partner } from 'models/partner';
 
@@ -6,12 +6,15 @@ export type NaverMapProps = {
   placeList: Partner[];
   setPartner: (partnerData: Partner) => void;
 };
-const NaverMap: FC<NaverMapProps> = ({ placeList, setPartner }) => {
+const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
   const { naver } = window;
 
-  const handleClickMarker = (e: any) => {
-    setPartner(e.overlay.title);
-  };
+  const handleClickMarker = useCallback(
+    (e) => {
+      setPartner(e.overlay.title);
+    },
+    [setPartner],
+  );
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -63,7 +66,7 @@ const NaverMap: FC<NaverMapProps> = ({ placeList, setPartner }) => {
           );
         });
     };
-  }, [placeList]);
+  }, [placeList, handleClickMarker, naver]);
 
   return <MapContainer id="map" />;
 };
