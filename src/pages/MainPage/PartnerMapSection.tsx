@@ -6,7 +6,11 @@ import { Partner } from 'models/partner';
 import { Section, MapSectionTitle, PartnerApply } from './style';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-const PartnerMapSection = () => {
+type Props = {
+  onModalOpen: () => void;
+};
+
+const PartnerMapSection: React.FC<Props> = ({ onModalOpen }) => {
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
 
   const selectPartner = (partnerData: Partner): void => {
@@ -39,9 +43,9 @@ const PartnerMapSection = () => {
             </MapSectionTitle>
             <PartnerApply>
               <span>내 가게가 안 보이나요?</span>
-              <a href="#">
+              <div onClick={onModalOpen}>
                 <span>파트너 신청하기</span> <ArrowForwardIcon />
-              </a>
+              </div>
             </PartnerApply>
           </>
         )}

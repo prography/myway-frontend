@@ -66,7 +66,7 @@ const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
           );
         });
     };
-  }, [placeList, handleClickMarker, naver]);
+  }, [placeList, naver]);
 
   return <MapContainer id="map" />;
 };
