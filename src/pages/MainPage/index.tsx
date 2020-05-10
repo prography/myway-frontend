@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { LayoutHOC } from 'components/Layout';
 import Container from 'components/Layout/Container';
 import Slide from 'components/Slide';
