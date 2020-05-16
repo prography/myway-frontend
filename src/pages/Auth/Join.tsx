@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, MouseEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { join } from 'store/auth/action';
 import { JoinParams } from 'api/auth';
@@ -21,7 +21,17 @@ interface JoinContentParams extends JoinParams {
 
 const Join = () => {
   const dispatch = useDispatch();
-  const isJoined = useSelector((state: StoreState) => state.auth.join.isJoined);
+  const { joinSuccess, joinFail } = useSelector((state: StoreState) => state.auth.join);
+
+  useEffect(() => {
+    if (joinSuccess) {
+      window.alert('회원가입이 완료되었습니다 !');
+      window.location.href = '/';
+    } 
+    if (joinFail) {
+      window.alert('이미 가입되어있는 이메일입니다 !');
+    }
+  }, [joinSuccess, joinFail]);
 
   const [joinContent, setJoinContent] = useState<JoinContentParams>({
     name: '',
@@ -33,11 +43,11 @@ const Join = () => {
 
   const handleLogin = (e: MouseEvent) => {
     window.location.href = '/login';
-  }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setJoinContent({...joinContent, [e.currentTarget.id]: e.currentTarget.value});
-  }
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -55,13 +65,7 @@ const Join = () => {
       company: joinContent.company,
       pwd: joinContent.pwd,
     }));
-    if (isJoined) {
-      window.alert('회원가입이 완료되었습니다 !');
-      window.location.href = '/';
-    } else {
-      window.alert('이미 가입되어있는 이메일입니다 !');
-    }
-  }
+  };
 
   return(
     <Container>
