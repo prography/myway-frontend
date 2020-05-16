@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 25%;
+  width: 376px;
 `;
 
 export const Title = styled.h2`
@@ -56,7 +56,7 @@ export const CheckTitle = styled.h2`
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 376px;
   height: 48px;
   border-radius: 3px;
   border: solid 1px #dcdcdc;
@@ -77,7 +77,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled('button')<{color?: string}>`
-  width: 100%;
+  width: 376px;
   height: 48px;
   border-radius: 3px;
   font-family: NotoSansCJKkr;
