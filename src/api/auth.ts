@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { User } from 'models/user';
-import { getAuthToken, setAuthToken } from 'utils/auth';
+import { setAuthToken } from 'utils/auth';
 
 export interface JoinParams {
   name: string;
