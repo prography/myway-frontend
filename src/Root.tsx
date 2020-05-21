@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { me } from 'store/auth/action';
 import { getAuthToken } from 'utils/auth';
+import Header from 'components/Layout/Header';
+
 // lazy-load
 const MainPage = lazy(() => import('pages/MainPage'));
 const Login = lazy(() => import('pages/Auth/Login'));
@@ -16,8 +18,9 @@ const Root = () => {
     dispatch(me(token));
   }, []);
 
-  return(
+  return (
     <Router>
+      <Header />
       <Suspense fallback="loading...">
         <Switch>
           <Route exact path="/" component={MainPage} />
