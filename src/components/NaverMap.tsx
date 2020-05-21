@@ -8,7 +8,6 @@ export type NaverMapProps = {
 };
 const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
   const { naver } = window;
-
   const handleClickMarker = useCallback(
     (e) => {
       setPartner(e.overlay.title);
@@ -17,6 +16,7 @@ const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
   );
 
   useEffect(() => {
+    const naverEventArray: Array<any> = [];
     const container = document.getElementById('map');
     const mapOptions = {
       center: new naver.maps.LatLng(37.4999894, 127.027699),
@@ -41,21 +41,8 @@ const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
 
     placeList.length &&
       placeList.forEach((place) => {
-        naver.maps.Event.addListener(
-          new naver.maps.Marker({
-            position: new naver.maps.LatLng(place.lat, place.lng),
-            map,
-            title: place,
-          }),
-          'click',
-          handleClickMarker,
-        );
-      });
-
-    return () => {
-      placeList.length &&
-        placeList.forEach((place) => {
-          naver.maps.Event.removeListener(
+        naverEventArray.push(
+          naver.maps.Event.addListener(
             new naver.maps.Marker({
               position: new naver.maps.LatLng(place.lat, place.lng),
               map,
@@ -63,8 +50,14 @@ const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
             }),
             'click',
             handleClickMarker,
-          );
-        });
+          ),
+        );
+      });
+
+    return () => {
+      naverEventArray.forEach((event: any) => {
+        naver.maps.Event.removeListener(event);
+      });
     };
   }, [placeList, naver]);
 
