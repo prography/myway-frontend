@@ -1,4 +1,4 @@
-import axios from 'axios';
+import fetcher from 'utils/fetcher';
 import { User } from 'models/user';
 import { setAuthToken } from 'utils/auth';
 
@@ -10,7 +10,7 @@ export interface JoinParams {
 };
 
 export const joinAdvertiser = async (params: JoinParams) => {
-  const { data } = await axios.post('https://api.copl.kr/advertisers',  params );
+  const { data } = await fetcher.post('/advertisers',  params );
   
   return data;
 };
@@ -21,7 +21,7 @@ export interface LoginParams {
 };
   
 export const loginAdvertiser = async (params: LoginParams) => {
-  const { data } = await axios.post('https://api.copl.kr/advertisers/login',  params );
+  const { data } = await fetcher.post('/advertisers/login',  params );
   setAuthToken(data.data.token);
 
   return data;
@@ -29,7 +29,7 @@ export const loginAdvertiser = async (params: LoginParams) => {
 
 export const getUser = async (token?: string) => {
   const headers = token ? { 'x-access-token': token } : {};
-  const { data } = await axios.get<{ data: User }>('https://api.copl.kr/advertisers/me', { headers });
+  const { data } = await fetcher.get<{ data: User }>('/advertisers/me', { headers });
   
   return data.data;
 };

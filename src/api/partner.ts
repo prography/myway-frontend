@@ -1,8 +1,8 @@
-import axios from 'axios';
+import fetcher from 'utils/fetcher';
 import { Partner } from 'models/partner';
 
 export const getPartners = async () => {
-  const { data } = await axios.get<{ arr: Partner[] }>('https://api.copl.kr/partners');
+  const { data } = await fetcher.get<{ arr: Partner[] }>('/partners');
 
   return data.arr;
 };
@@ -16,7 +16,7 @@ export interface ApplyPartnerParams {
 };
 
 export const applyPartner = async (params: ApplyPartnerParams) => {
-  const { data } = await axios.post('https://api.copl.kr/apply-partner',  params );
+  const { data } = await fetcher.post('/apply-partner',  params );
   
   return data;
 };
