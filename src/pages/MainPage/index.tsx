@@ -79,7 +79,7 @@ const MainPage = () => {
         <Container>
           <SectionTitle>
             지금까지 <span className="highlight text-orange">32,500명</span>이
-            마이웨이를 이용해서 <br />
+            커플을 이용해서 <br />
             우리 동네에 광고를 하고 있어요!
           </SectionTitle>
           <FeatureWrap>
