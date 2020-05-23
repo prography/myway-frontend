@@ -1,10 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Container from './Container';
 import { Link } from 'react-router-dom';
 import logo from 'assets/images/logo.svg';
+import { destroyAuthToken } from 'utils/auth';
 
 const Header = () => {
+  const isLoggedIn = useSelector((state: StoreState) => state.auth.me.isLoggedIn);
+
+  const handleLogout = () => {
+    const confirm = window.confirm('로그아웃 하시겠습니까?');
+    if (!confirm) return;
+    destroyAuthToken();
+    window.location.href = '/';
+  };
+
   return (
     <HeaderWrapper>
       <Container>
@@ -15,12 +26,20 @@ const Header = () => {
             </Link>
           </LogoWrapper>
           <Navigation>
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
-            <li>
-              <Link to="/join">회원가입</Link>
-            </li>
+            {!isLoggedIn ? (
+              <>
+                <li>
+                  <Link to="/login">로그인</Link>
+                </li>
+                <li>
+                  <Link to="/join">회원가입</Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link to="/" onClick={handleLogout}>로그아웃</Link>
+              </li>
+            )}
           </Navigation>
         </HeaderContainer>
       </Container>
