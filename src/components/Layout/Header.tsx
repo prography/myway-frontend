@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Container from './Container';
 import { Link } from 'react-router-dom';
+import logo from 'assets/images/logo.svg';
 
 const Header = () => {
   return (
@@ -9,7 +10,9 @@ const Header = () => {
       <Container>
         <HeaderContainer>
           <LogoWrapper>
-            <Link to="/">COPL</Link>
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
           </LogoWrapper>
           <Navigation>
             <li>
@@ -33,7 +36,7 @@ const HeaderWrapper = styled.div`
   left: 0;
   z-index: 99;
   width: 100%;
-  height: 60px;
+  padding: 1rem 0;
 `;
 
 const HeaderContainer = styled.div`
@@ -46,8 +49,10 @@ const LogoWrapper = styled.div`
   font-size: 1rem;
 
   a {
-    font-size: 1.5rem;
-    color: #333;
+    img {
+      width: 72px;
+      height: 32px;
+    }
   }
 `;
 
