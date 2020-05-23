@@ -117,7 +117,7 @@ const MainPage = () => {
         <Container>
           <div className="enroll-detail-view">
             <SectionTitle align="left">
-              마이웨이를 이용해서
+              커플을 이용해서
               <br />
               <span className="highlight">내 가게를 쉽고 간편하게</span>
               <br />
