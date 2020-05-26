@@ -162,7 +162,7 @@ export const FloatingBar = styled.div`
   height: 80px;
   position: fixed;
   bottom: 0;
-  z-index: 10;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
