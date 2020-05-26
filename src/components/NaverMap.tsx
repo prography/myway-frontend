@@ -35,6 +35,7 @@ const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
         style: naver.maps.ZoomControlStyle.SMALL,
         position: naver.maps.Position.TOP_RIGHT,
       },
+      scrollWheel: false,
     };
 
     const map = new naver.maps.Map(container, mapOptions);
