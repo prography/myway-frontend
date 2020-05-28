@@ -9,6 +9,7 @@ import Header from 'components/Layout/Header';
 const MainPage = lazy(() => import('pages/MainPage'));
 const Login = lazy(() => import('pages/Auth/Login'));
 const Join = lazy(() => import('pages/Auth/Join'));
+const Places = lazy(() => import('pages/Places'));
 
 const Root = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Root = () => {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/join" component={Join} />
+          <Route exact path="/places" component={Places} />
         </Switch>
       </Suspense>
     </Router>
