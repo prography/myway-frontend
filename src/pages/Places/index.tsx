@@ -14,8 +14,6 @@ const Places = () => {
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
   const partners = usePartner();
 
-  console.log(selectedPartner);
-
   return (
     <PlacesWrapper>
       <PageTitle>COPL ZONE</PageTitle>
