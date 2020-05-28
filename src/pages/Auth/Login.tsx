@@ -18,17 +18,17 @@ import {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { loginSuccess, loginFail } = useSelector((state: StoreState) => state.auth.login);
+  const { status } = useSelector((state: StoreState) => state.auth.login);
   const isLoggedIn = useSelector((state: StoreState) => state.auth.me.isLoggedIn);
 
   useEffect(() => {
-    if (loginSuccess) {
+    if (status === 'SUCCESS') {
       window.location.href = '/';
     } 
-    if (loginFail) {
+    if (status === 'FAILURE') {
       window.alert('이메일 혹은 비밀번호가 일치하지 않아요 !');
     }
-  }, [loginSuccess, loginFail]);
+  }, [status]);
   
   const [loginContent, setLoginContent] = useState<LoginParams>({
     email: '',

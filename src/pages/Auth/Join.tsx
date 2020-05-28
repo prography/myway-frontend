@@ -21,17 +21,17 @@ interface JoinContentParams extends JoinParams {
 
 const Join = () => {
   const dispatch = useDispatch();
-  const { joinSuccess, joinFail } = useSelector((state: StoreState) => state.auth.join);
+  const { status } = useSelector((state: StoreState) => state.auth.join);
 
   useEffect(() => {
-    if (joinSuccess) {
+    if (status === 'SUCCESS') {
       window.alert('회원가입이 완료되었습니다 !');
       window.location.href = '/';
     } 
-    if (joinFail) {
+    if (status === 'FAILURE') {
       window.alert('이미 가입되어있는 이메일입니다 !');
     }
-  }, [joinSuccess, joinFail]);
+  }, [status]);
 
   const [joinContent, setJoinContent] = useState<JoinContentParams>({
     name: '',
