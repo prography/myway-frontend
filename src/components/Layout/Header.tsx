@@ -42,7 +42,7 @@ const Header = () => {
               </>
             ) : (
               <li>
-                <Link to="/" onClick={handleLogout}>
+                <Link to="#" onClick={handleLogout}>
                   로그아웃
                 </Link>
               </li>
