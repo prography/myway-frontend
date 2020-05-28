@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components';
 import usePartner from 'hooks/usePartner';
 import { Partner } from 'models/partner';
@@ -6,6 +6,7 @@ import { Partner } from 'models/partner';
 import Container from 'components/Layout/Container';
 import NaverMap from 'components/NaverMap';
 import PlaceCard from './PlaceCard';
+import PartnerDetailPopup from './PartnerDetailPopup';
 
 import CafeImageSample from 'assets/images/sec5-img.jpg';
 
@@ -13,10 +14,17 @@ const Places = () => {
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
   const partners = usePartner();
 
+  console.log(selectedPartner);
+
   return (
     <PlacesWrapper>
       <PageTitle>COPL ZONE</PageTitle>
       <MapWrapper>
+        {selectedPartner && (
+          <MapPopup>
+            <PartnerDetailPopup address={selectedPartner.address} />
+          </MapPopup>
+        )}
         <NaverMap placeList={partners} setPartner={setSelectedPartner} />
       </MapWrapper>
       <Container>
@@ -41,7 +49,7 @@ const Places = () => {
   );
 };
 
-export default Places;
+export default React.memo(Places);
 
 const PlacesWrapper = styled.div`
   padding: 6.25rem 0;
@@ -50,6 +58,14 @@ const PlacesWrapper = styled.div`
 const MapWrapper = styled.div`
   width: 100%;
   height: 360px;
+  position: relative;
+`;
+
+const MapPopup = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
 `;
 
 const PageTitle = styled.h2`

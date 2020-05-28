@@ -65,7 +65,7 @@ const NaverMap: React.FC<NaverMapProps> = ({ placeList, setPartner }) => {
   return <MapContainer id="map" />;
 };
 
-export default NaverMap;
+export default React.memo(NaverMap);
 
 const MapContainer = styled.div`
   width: 100%;
