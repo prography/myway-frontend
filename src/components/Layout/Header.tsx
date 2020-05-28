@@ -7,7 +7,9 @@ import logo from 'assets/images/logo.svg';
 import { destroyAuthToken } from 'utils/auth';
 
 const Header = () => {
-  const isLoggedIn = useSelector((state: StoreState) => state.auth.me.isLoggedIn);
+  const isLoggedIn = useSelector(
+    (state: StoreState) => state.auth.me.isLoggedIn,
+  );
 
   const handleLogout = () => {
     const confirm = window.confirm('로그아웃 하시겠습니까?');
@@ -26,6 +28,9 @@ const Header = () => {
             </Link>
           </LogoWrapper>
           <Navigation>
+            <li>
+              <Link to="/places">플레이스</Link>
+            </li>
             {!isLoggedIn ? (
               <>
                 <li>
@@ -37,7 +42,9 @@ const Header = () => {
               </>
             ) : (
               <li>
-                <Link to="/" onClick={handleLogout}>로그아웃</Link>
+                <Link to="/" onClick={handleLogout}>
+                  로그아웃
+                </Link>
               </li>
             )}
           </Navigation>
