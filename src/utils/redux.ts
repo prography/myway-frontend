@@ -48,7 +48,6 @@ export const createReducer = (
     },
     [entity.failure.type]: (state, action) => {
       return produce(state, draft => {
-        console.log("Fail")
         draft.status = 'FAILURE';
       });
     },
