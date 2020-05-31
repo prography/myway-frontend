@@ -1,118 +1,80 @@
+import { handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { combineReducers } from 'redux';
 import { User } from 'models/user';
+import { createReducer } from 'utils/redux';
+import { joinEntity } from './action';
+import { setAuthToken } from 'utils/auth';
 
 export type AuthState = {
   join: {
-    joinSuccess: boolean;
-    joinFail: boolean;
-    status: string;
+    status: Status;
   },
   login: {
-    loginSuccess: boolean;
-    loginFail: boolean;
-    status: string;
+    status: Status;
   },
-  me: User & {
+  me: {
+    info: User;
     isLoggedIn: boolean;
   },
 };
 
 const initialState: AuthState = {
   join: {
-    joinSuccess: false,
-    joinFail: false,
     status: 'INIT',
   },
   login: {
-    loginSuccess: false,
-    loginFail: false,
     status: 'INIT',
   },
   me: {
-    id: 0,
-    name: '',
-    email: '',
-    company: '',
+    info: {
+      id: 0,
+      name: '',
+      email: '',
+      company: '',
+    },
     isLoggedIn: false,
   },
 };
 
-const joinReducer = (
-  state: AuthState['join'] = initialState.join, 
-  action: any
-): AuthState['join'] => {
-  return produce(state, (draft) => {
-    switch (action.type) {
-      case 'JOIN_REQUEST':
-        draft.status = 'REQUEST';
-        draft.joinSuccess = false;
-        draft.joinFail = false;
-        return draft;
-      case 'JOIN_SUCCESS':
-        draft.status = 'SUCCESS';
-        draft.joinSuccess = true;
-        return draft;
-      case 'JOIN_FAILURE':
-        draft.status = 'FAILURE';
-        draft.joinFail = true;
-        return draft;
-      default:
-        return draft;
-    }
-  });
-};
+const joinReducer = createReducer(joinEntity, initialState.join);
 
-const loginReducer = (
-  state: AuthState['login'] = initialState.login, 
-  action: any
-): AuthState['login'] => {
-  return produce(state, (draft) => {
-    switch (action.type) {
-      case 'LOGIN_REQUEST':
-        draft.status = 'REQUEST';
-        draft.loginSuccess = false;
-        draft.loginFail = false;
-        return draft;
-      case 'LOGIN_SUCCESS':
-        draft.status = 'SUCCESS';
-        draft.loginSuccess = true;
-        return draft;
-      case 'LOGIN_FAILURE':
-        draft.status = 'FAILURE';
-        draft.loginFail = true;
-        return draft;
-      default:
-        return draft;
-    }
-  });
-};
+const loginReducer = handleActions({
+  ['LOGIN_REQUEST']: (state, action) => {
+    return produce(state, draft => {
+      draft.status = 'REQUEST';
+    });
+  },
+  ['LOGIN_SUCCESS']: (state, action) => {
+    return produce(state, draft => {
+      draft.status = 'SUCCESS';
+      setAuthToken(action.payload);
+    });
+  },
+  ['LOGIN_FAILURE']: (state, action) => {
+    return produce(state, draft => {
+      draft.status = 'FAILURE';
+    });
+  },
+}, initialState.login);
 
-const meReducer = (
-  state: AuthState['me'] = initialState.me, 
-  action: any
-): AuthState['me'] => {
-  return produce(state, (draft) => {
-    switch (action.type) {
-      case 'ME_REQUEST':
-        return draft;
-      case 'ME_SUCCESS':
-        draft = {
-          ...action.payload, 
-          isLoggedIn: true,
-        };
-        return draft;
-      case 'ME_FAILURE':
-        draft = {
-          ...initialState.me, 
-          isLoggedIn: false,  
-        };
-        return draft;
-      default:
-        return draft;
-    }
-  });
-};
+const meReducer = handleActions({
+  ['ME_REQUEST']: (state, action) => {
+    return produce(state, draft => {});
+  },
+  ['ME_SUCCESS']: (state, action) => {
+    return produce(state, draft => {
+      draft.info = action.payload as unknown as User;
+      draft.isLoggedIn = true;
+    });
+  },
+  ['ME_FAILURE']: (state, action) => {
+    return produce(state, draft => {
+      draft.info = initialState.me.info;
+      draft.isLoggedIn = false;
+    });
+  },
+}, initialState.me);
 
 export default combineReducers({
   join: joinReducer,

@@ -1,3 +1,6 @@
+import { handleActions } from 'redux-actions';
+import { produce } from 'immer';
+
 // type이 있는 ActionCreator 만들기
 export const createAction = <P, Type extends string = string>(type: Type) => {
   function fn(payload?: P): { type: Type };
@@ -22,3 +25,31 @@ export const createEntity = <Params extends any[], Res>(
   failure: createAction<string>(`${prefix}_FAILURE`),
   api,
 });
+
+// reducer 만들기
+export const createReducer = (
+  entity: EntitySchema,
+  state: {
+    status: Status;
+    items?: any[];
+  },
+) => 
+  handleActions({
+    [entity.request.type]: (state, action) => {
+      return produce(state, draft => {
+        draft.status = 'REQUEST';
+      });
+    },
+    [entity.success.type]: (state, action) => {
+      return produce(state, draft => {
+        draft.status = 'SUCCESS';
+        draft.items = draft.items?.concat(action.payload);
+      });
+    },
+    [entity.failure.type]: (state, action) => {
+      return produce(state, draft => {
+        draft.status = 'FAILURE';
+      });
+    },
+  }, state);
+ 
