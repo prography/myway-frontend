@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { RouteComponentProps } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -53,6 +53,14 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
     }
   };
 
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    setCart(
+      cart.filter((item, idx) => 
+        idx !== parseInt(e.currentTarget.dataset.id || '')
+      )
+    );
+  };
+
   const handleAddCart = () => {
     CartHelper.addCart(JSON.stringify(cart));
   };
@@ -92,11 +100,14 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
               onChange={handleChangeTime}
             />
           </Option>
-          <ThinHr />
+          {cart.length > 0 && <ThinHr />}
           {cart.map((item, idx) => (
             <SelectionWrapper key={idx}>
               <div>선택 {idx+1}</div>
-              <div>{detailInfo.name} / {item.date} / {item.time}:00 ~ {item.time+1}:00 </div>
+              <div>
+                {detailInfo.name} / {item.date} / {item.time}:00 ~ {item.time+1}:00 
+                <DelButton data-id={idx} onClick={handleDelete}>X</DelButton>
+              </div>
             </SelectionWrapper>
           ))}
           <ThinHr />
@@ -223,4 +234,14 @@ const Button = styled('button')<{color?: string}>`
   border-radius: 3px;
   display: flex;
   justify-content: center;
+`;
+
+const DelButton = styled.button`
+  width: 1.125rem;
+  height: 1.125rem;
+  font-size: 0.625rem;
+  border: solid 1px #b6b6b6;
+  background-color: #ffffff;
+  color: #b6b6b6;
+  margin-left: 0.625rem;
 `;
