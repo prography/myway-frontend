@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 type PlaceCardProps = {
+  placeId: number;
   placeName: string;
   placeAddress: string;
   placeTel: string;
@@ -11,6 +12,7 @@ type PlaceCardProps = {
 };
 
 const PlaceCard: React.FC<PlaceCardProps> = ({
+  placeId,
   placeName,
   placeAddress,
   placePrice,
@@ -27,7 +29,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({
 
   return (
     <CardContainer>
-      <Link to="#">
+      <Link to={`/places/${placeId}`}>
         <PlaceImageWrap>
           <span>{PlaceThumbnail}</span>
         </PlaceImageWrap>

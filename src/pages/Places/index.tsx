@@ -31,6 +31,7 @@ const Places = () => {
           {partners.map((data) => (
             <PlaceCardWrapper key={data.id}>
               <PlaceCard
+                placeId={data.id}
                 placeName={data.name}
                 placeAddress={data.address}
                 placeTel={data.phone}

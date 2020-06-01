@@ -1,4 +1,4 @@
-type availAdTime = {
+export type availAdTime = {
   adDate: string;
   adHour: number;
 }
@@ -9,7 +9,8 @@ export type Partner = {
   lat: number;
   lng: number;
   imgUrl: string;
-  description: string;
+  //description: string;
+  createdAt: string;
   address: string;
   workingTime: string;
   phone: string;
