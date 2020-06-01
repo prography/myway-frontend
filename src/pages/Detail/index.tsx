@@ -130,7 +130,11 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
 export default React.memo(Detail);
 
 const DetailContainer = styled.div`
-  padding: 6.25rem 11.25rem;
+  padding: 6.25rem 7.25rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 6.25rem 1.25rem;
+  }
 `;
 
 const PageTitle = styled.h2`
@@ -144,18 +148,31 @@ const PageTitle = styled.h2`
 const DetailWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const PictureWrapper = styled.div`
-  width: 50%;
+  width: 48%;
   height: 850px;
-  position: relative;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 600px;
+  }
 `;
 
 const InfoWrapper = styled.div`
-  width: 50%;
+  width: 48%;
   height: 850px;
-  position: relative;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 600px;
+  }
 `;
 
 const PartnerName = styled.h2`
