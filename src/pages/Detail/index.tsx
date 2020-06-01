@@ -160,7 +160,7 @@ const InfoWrapper = styled.div`
 
 const PartnerName = styled.h2`
   font-size: 2.5rem;
-  font-family: Noto Sans KR Medium;
+  font-family: Noto Sans KR Light;
   text-align: left;
   margin-bottom: 1.8rem;
 `;
