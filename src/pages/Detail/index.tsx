@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getPartnerDetail } from 'store/partner/action';
 import TimeSelect from './TimeSelect';
+import DetailPicture from './DetailPicture';
 import CartHelper from 'utils/cart';
 
 interface MatchParams {
@@ -70,7 +71,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
       <PageTitle>HOME > COPL ZONE > 가게 상세</PageTitle>
       <DetailWrapper>
         <PictureWrapper>
-
+          <DetailPicture imgUrl={detailInfo.imgUrl}/>
         </PictureWrapper>
         <InfoWrapper>
           <PartnerName>{detailInfo.name}</PartnerName>
