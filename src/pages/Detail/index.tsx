@@ -113,7 +113,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
           <ThinHr />
           <PriceWrapper>
             <PriceTitle>총 결제금액</PriceTitle>
-            <Price>{(cart.length * 1000).toLocaleString()}원 ({cart.length}시간) </Price>
+            <Price>{(cart.length * detailInfo.pricePerHour).toLocaleString()}원 ({cart.length}시간) </Price>
           </PriceWrapper>
           <ThinHr />
           <PayWrapper>
