@@ -34,15 +34,20 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
 
   useEffect(() => {
     if (!time) return;
-    // TODO : 아이템 중복 체크
-    setCart([
-      ...cart, {
-        id: parseInt(match.params.id), 
-        date, 
-        time,
-      }
-    ]);
+
+    const newItem: CartItem = {
+      id: parseInt(match.params.id), 
+      date, 
+      time, 
+    };
+
+    if(cart.some(item => JSON.stringify(item) === JSON.stringify(newItem))) {
+      window.alert('이미 선택된 옵션입니다 !');
+      return;
+    } 
+    setCart([ ...cart, newItem ]);
   }, [time]);
+
 
   const handleChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     setDate(e.currentTarget.value);
