@@ -68,7 +68,14 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   };
 
   const handleAddCart = () => {
+    if(cart.length === 0) {
+      window.alert('상품을 선택해주세요 !');
+      return;
+    }
     CartHelper.addCart(JSON.stringify(cart));
+    window.alert(`${cart.length}개의 상품이 장바구니에 담겼습니다 !`);
+    setDate("");
+    setCart([]);
   };
 
   return (
@@ -94,6 +101,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
             <input 
               id="date"
               type="date"
+              value={date}
               min={new Date().toISOString().split("T",1).toString()}
               onChange={handleChangeDate}
             />
