@@ -12,7 +12,8 @@ interface MatchParams {
 }
 
 type CartItem = {
-  id: number;
+  partnerId: number;
+  availId: number;
   date: string;
   time: number;
 }
@@ -20,6 +21,7 @@ type CartItem = {
 const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState(0);
+  const [availId, setAvailId] = useState(0);
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const dispatch = useDispatch();
@@ -36,7 +38,8 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
     if (!time) return;
 
     const newItem: CartItem = {
-      id: parseInt(match.params.id), 
+      partnerId: parseInt(match.params.id), 
+      availId,
       date, 
       time, 
     };
@@ -48,15 +51,13 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
     setCart([ ...cart, newItem ]);
   }, [time]);
 
-
   const handleChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     setDate(e.currentTarget.value);
   };
 
   const handleChangeTime = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value) {
-      setTime(parseInt(e.currentTarget.value));
-    }
+    setAvailId(JSON.parse(e.currentTarget.value).availId);
+    setTime(JSON.parse(e.currentTarget.value).adHour);
   };
 
   const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {

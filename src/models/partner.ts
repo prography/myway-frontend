@@ -1,4 +1,5 @@
 export type availAdTime = {
+  id: number;
   adDate: string;
   adHour: number;
 }

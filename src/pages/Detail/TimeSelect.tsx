@@ -7,21 +7,30 @@ type Props = {
   onChange: ChangeEventHandler;
 }
 
+type AvailItem = {
+  availId: number;
+  adHour: number;
+}
+
 const TimeSelect: React.FC<Props> = ({ 
   date, 
   availAdTimeTables, 
   onChange,
 }) => {
-  const [options, setOptions] = useState<number[]>([]);
+  const [options, setOptions] = useState<AvailItem[]>([]);
 
   useEffect(() => {
-    let availTimes: number[] = [];
+    const availItems: AvailItem[] = [];
+
     availAdTimeTables.forEach((item) => {
       if(item.adDate === date) {
-        availTimes.push(item.adHour);
+        availItems.push({
+          availId: item.id,
+          adHour: item.adHour,
+        });
       }
     });
-    setOptions(availTimes);
+    setOptions(availItems);
   }, [date]);
 
   return (
@@ -30,7 +39,7 @@ const TimeSelect: React.FC<Props> = ({
     >
       <option value={0}>시간을 선택해 주세요.</option>
       {options.map((item) => (
-        <option key={item} value={item}>{item}:00 ~ {item+1}:00</option>
+        <option key={item.availId} value={JSON.stringify(item)}>{item.adHour}:00 ~ {item.adHour + 1}:00</option>
       ))}
     </select>
   );
