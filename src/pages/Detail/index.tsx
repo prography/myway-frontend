@@ -11,18 +11,26 @@ interface MatchParams {
   id: string;
 }
 
-type CartItem = {
+type ListItem = {
   partnerId: number;
-  availId: number;
   date: string;
   time: number;
+}
+
+type CartItem = {
+  partnerId: number;
+  availId: number[];
 }
 
 const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState(0);
-  const [availId, setAvailId] = useState(0);
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [list, setList] = useState<ListItem[]>([]);
+  const [availId, setAvailId] = useState<number[]>([]);
+  const [cart, setCart] = useState<CartItem>({
+    partnerId: parseInt(match.params.id),
+    availId: [],
+  });
 
   const dispatch = useDispatch();
   const detailInfo = useSelector(
@@ -36,47 +44,63 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
 
   useEffect(() => {
     if (!time) return;
-
-    const newItem: CartItem = {
+    const newItem: ListItem = {
       partnerId: parseInt(match.params.id), 
-      availId,
       date, 
       time, 
     };
-
-    if(cart.some(item => JSON.stringify(item) === JSON.stringify(newItem))) {
-      window.alert('이미 선택된 옵션입니다 !');
-      return;
-    } 
-    setCart([ ...cart, newItem ]);
+    setList([ ...list, newItem ]);
   }, [time]);
+
+  useEffect(()=>{
+    setCart({...cart, ['availId']: availId});
+  }, [availId]);
+
+  const handleCheckSelected = (id: number) => {
+    if(availId.some(item => item === id)) {
+      window.alert('이미 선택된 옵션입니다 !');
+      return false;
+    }
+    return true;
+  };
 
   const handleChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
     setDate(e.currentTarget.value);
   };
 
   const handleChangeTime = (e: ChangeEvent<HTMLInputElement>) => {
-    setAvailId(JSON.parse(e.currentTarget.value).availId);
-    setTime(JSON.parse(e.currentTarget.value).adHour);
+    const check = handleCheckSelected(JSON.parse(e.currentTarget.value).availId);
+    if (check) {
+      setTime(JSON.parse(e.currentTarget.value).adHour);
+      setAvailId([...availId, JSON.parse(e.currentTarget.value).availId]);
+    }
   };
 
   const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
-    setCart(
-      cart.filter((item, idx) => 
+    setList(
+      list.filter((item, idx) => 
+        idx !== parseInt(e.currentTarget.dataset.id || '')
+      )
+    );
+    setAvailId(
+        availId.filter((item, idx) => 
         idx !== parseInt(e.currentTarget.dataset.id || '')
       )
     );
   };
 
   const handleAddCart = () => {
-    if(cart.length === 0) {
+    if(list.length === 0) {
       window.alert('상품을 선택해주세요 !');
       return;
     }
+
     CartHelper.addCart(JSON.stringify(cart));
-    window.alert(`${cart.length}개의 상품이 장바구니에 담겼습니다 !`);
+    window.alert(`${list.length}개의 상품이 장바구니에 담겼습니다 !`);
     setDate("");
-    setCart([]);
+    setTime(0);
+    setList([]);
+    setAvailId([]);
   };
 
   return (
@@ -115,8 +139,8 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
               onChange={handleChangeTime}
             />
           </Option>
-          {cart.length > 0 && <ThinHr />}
-          {cart.map((item, idx) => (
+          {list.length > 0 && <ThinHr />}
+          {list.map((item, idx) => (
             <SelectionWrapper key={idx}>
               <div>선택 {idx+1}</div>
               <div>
@@ -128,7 +152,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
           <ThinHr />
           <PriceWrapper>
             <PriceTitle>총 결제금액</PriceTitle>
-            <Price>{(cart.length * detailInfo.pricePerHour).toLocaleString()}원 ({cart.length}시간) </Price>
+            <Price>{(list.length * detailInfo.pricePerHour).toLocaleString()}원 ({list.length}시간) </Price>
           </PriceWrapper>
           <ThinHr />
           <PayWrapper>
