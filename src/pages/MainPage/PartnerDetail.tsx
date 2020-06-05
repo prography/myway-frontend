@@ -75,7 +75,7 @@ const ParnterInfoPic = styled.div`
   display: block;
   overflow: hidden;
 
-	img {
+  img {
     position: absolute;
     top: 0;
     left: 0;
