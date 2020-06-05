@@ -30,9 +30,9 @@ const PartnerDetail: React.FC<Props> = ({ data }) => {
           </li>
         </ParnterInfoList>
       </div>
-      <div>
-        <img src={TestImage} alt="test_image" width={508} />
-      </div>
+      <ParnterInfoPic>
+        <img src={data.imgUrl} alt="test_image" width={508} />
+      </ParnterInfoPic>
     </PartnerInfoContainer>
   );
 };
@@ -66,6 +66,23 @@ const PartnerInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+`;
+
+const ParnterInfoPic = styled.div`
+  width: 526.3px;
+  height:345px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export default PartnerDetail;
