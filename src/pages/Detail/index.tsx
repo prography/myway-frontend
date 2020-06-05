@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { RouteComponentProps } from "react-router";
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getPartnerDetail } from 'store/partner/action';
@@ -39,25 +40,25 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
 
   useEffect(() => {
     dispatch(getPartnerDetail(parseInt(match.params.id)));
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
     if (!time) return;
     const newItem: ListItem = {
-      partnerId: parseInt(match.params.id), 
-      date, 
-      time, 
+      partnerId: parseInt(match.params.id),
+      date,
+      time,
     };
-    setList([ ...list, newItem ]);
+    setList([...list, newItem]);
   }, [time]);
 
-  useEffect(()=>{
-    setCart({...cart, ['availId']: availId});
+  useEffect(() => {
+    setCart({ ...cart, ['availId']: availId });
   }, [availId]);
 
   const handleCheckSelected = (id: number) => {
-    if(availId.some(item => item === id)) {
+    if (availId.some(item => item === id)) {
       window.alert('이미 선택된 옵션입니다 !');
       return false;
     }
@@ -78,19 +79,19 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
 
   const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
     setList(
-      list.filter((item, idx) => 
+      list.filter((item, idx) =>
         idx !== parseInt(e.currentTarget.dataset.id || '')
       )
     );
     setAvailId(
-        availId.filter((item, idx) => 
+      availId.filter((item, idx) =>
         idx !== parseInt(e.currentTarget.dataset.id || '')
       )
     );
   };
 
   const handleAddCart = () => {
-    if(list.length === 0) {
+    if (list.length === 0) {
       window.alert('상품을 선택해주세요 !');
       return;
     }
@@ -108,7 +109,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
       <PageTitle>HOME > COPL ZONE > 가게 상세</PageTitle>
       <DetailWrapper>
         <PictureWrapper>
-          <DetailPicture imgUrl={detailInfo.imgUrl}/>
+          <DetailPicture imgUrl={detailInfo.imgUrl} />
         </PictureWrapper>
         <InfoWrapper>
           <PartnerName>{detailInfo.name}</PartnerName>
@@ -123,18 +124,18 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
           </Option>
           <Option>
             <OptionTitle>날짜</OptionTitle>
-            <input 
+            <input
               id="date"
               type="date"
               value={date}
-              min={new Date().toISOString().split("T",1).toString()}
+              min={new Date().toISOString().split("T", 1).toString()}
               onChange={handleChangeDate}
             />
           </Option>
           <Option>
             <OptionTitle>시간</OptionTitle>
-            <TimeSelect 
-              date={date} 
+            <TimeSelect
+              date={date}
               availAdTimeTables={detailInfo.availAdTimeTables}
               onChange={handleChangeTime}
             />
@@ -142,9 +143,9 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
           {list.length > 0 && <ThinHr />}
           {list.map((item, idx) => (
             <SelectionWrapper key={idx}>
-              <div>선택 {idx+1}</div>
+              <div>선택 {idx + 1}</div>
               <div>
-                {detailInfo.name} / {item.date} / {item.time}:00 ~ {item.time+1}:00 
+                {detailInfo.name} / {item.date} / {item.time}:00 ~ {item.time + 1}:00
                 <DelButton data-id={idx} onClick={handleDelete}>X</DelButton>
               </div>
             </SelectionWrapper>
@@ -157,7 +158,21 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
           <ThinHr />
           <PayWrapper>
             <Button onClick={handleAddCart}>장바구니 담기</Button>
-            <Button color="black">바로 구매하기</Button>
+            <Button color="black">
+              <Link to={{
+                pathname: '/orderForm',
+                state: {
+                  payInfo: {
+                    partnerInfo: detailInfo,
+                    timeList: cart.availId,
+                  }
+                }
+              }}
+                style={{ color: '#ffffff' }}
+              >
+                바로 구매하기
+              </Link>
+            </Button>
           </PayWrapper>
           <Hr />
         </InfoWrapper>
@@ -278,7 +293,7 @@ const PayWrapper = styled.div`
   margin: 0.5rem 0;
 `;
 
-const Button = styled('button')<{color?: string}>`
+const Button = styled('button') <{ color?: string }>`
   width: 49%;
   display: flex;
   margin: 0.25rem;
