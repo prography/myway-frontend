@@ -158,8 +158,8 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
           <ThinHr />
           <PayWrapper>
             <Button onClick={handleAddCart}>장바구니 담기</Button>
-            <Button color="black">
-              <Link to={{
+            <Button color="black" disabled={!cart.availId.length}>
+              {cart.availId.length ? (<Link to={{
                 pathname: '/orderForm',
                 state: {
                   payInfo: {
@@ -171,7 +171,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
                 style={{ color: '#ffffff' }}
               >
                 바로 구매하기
-              </Link>
+              </Link>) : '바로 구매하기'}
             </Button>
           </PayWrapper>
           <Hr />
