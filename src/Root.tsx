@@ -11,6 +11,7 @@ const Login = lazy(() => import('pages/Auth/Login'));
 const Join = lazy(() => import('pages/Auth/Join'));
 const Places = lazy(() => import('pages/Places'));
 const Detail = lazy(() => import('pages/Detail'));
+const OrderForm = lazy(() => import('pages/OrderForm'));
 
 const Root = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Root = () => {
           <Route exact path="/join" component={Join} />
           <Route exact path="/places" component={Places} />
           <Route exact path="/places/:id" component={Detail} />
+          <Route exact path="/orderForm" component={OrderForm} />
         </Switch>
       </Suspense>
     </Router>
