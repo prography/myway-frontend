@@ -7,6 +7,12 @@ export const getPartners = async () => {
   return data.arr;
 };
 
+export const getPartnerDetail = async (id: Partner['id']) => {
+  const { data } = await fetcher.get<{ data: Partner }>(`/partners/${id}`);
+
+  return data.data;
+};
+
 export interface ApplyPartnerParams {
   phone: string;
   address: string;

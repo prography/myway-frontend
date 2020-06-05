@@ -8,8 +8,6 @@ import NaverMap from 'components/NaverMap';
 import PlaceCard from './PlaceCard';
 import PartnerDetailPopup from './PartnerDetailPopup';
 
-import CafeImageSample from 'assets/images/sec5-img.jpg';
-
 const Places = () => {
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
   const partners = usePartner();
@@ -30,14 +28,15 @@ const Places = () => {
           <PlaceCountLabel>{partners.length}개의 공간</PlaceCountLabel>
         </TierContainer>
         <PlaceCardContainer>
-          {partners.map((data, idx) => (
+          {partners.map((data) => (
             <PlaceCardWrapper key={data.id}>
               <PlaceCard
+                placeId={data.id}
                 placeName={data.name}
                 placeAddress={data.address}
-                placeTel="02-1234-5678"
-                placePrice={1000}
-                placeThumbnailUrl={idx % 2 === 0 ? CafeImageSample : undefined}
+                placeTel={data.phone}
+                placePrice={data.pricePerHour}
+                placeThumbnailUrl={data.imgUrl}
               />
             </PlaceCardWrapper>
           ))}
