@@ -18,7 +18,7 @@ export const createAction = <P, Type extends string = string>(type: Type) => {
 // entity 만들기 - 비동기일 때 사용
 export const createEntity = <Params extends any[], Res>(
   prefix: string,
-  api: APIEndpoint<Params, Res>
+  api: APIEndpoint<Params, Res>,
 ) => ({
   request: createAction<Params>(`${prefix}_REQUEST`),
   success: createAction<Res>(`${prefix}_SUCCESS`),
@@ -31,25 +31,27 @@ export const createReducer = (
   entity: EntitySchema,
   state: {
     status: Status;
-    items?: any[];
+    items?: any;
   },
-) => 
-  handleActions({
-    [entity.request.type]: (state, action) => {
-      return produce(state, draft => {
-        draft.status = 'REQUEST';
-      });
+) =>
+  handleActions(
+    {
+      [entity.request.type]: (state, action) => {
+        return produce(state, (draft) => {
+          draft.status = 'REQUEST';
+        });
+      },
+      [entity.success.type]: (state, action) => {
+        return produce(state, (draft) => {
+          draft.status = 'SUCCESS';
+          draft.items = action.payload;
+        });
+      },
+      [entity.failure.type]: (state, action) => {
+        return produce(state, (draft) => {
+          draft.status = 'FAILURE';
+        });
+      },
     },
-    [entity.success.type]: (state, action) => {
-      return produce(state, draft => {
-        draft.status = 'SUCCESS';
-        draft.items = draft.items?.concat(action.payload);
-      });
-    },
-    [entity.failure.type]: (state, action) => {
-      return produce(state, draft => {
-        draft.status = 'FAILURE';
-      });
-    },
-  }, state);
- 
+    state,
+  );

@@ -9,14 +9,14 @@ export type PartnerState = {
   partners: {
     status: Status;
     items: Partner[];
-  },
+  };
   partnerDetail: {
     status: Status;
     item: Partner;
-  },
+  };
   applyPartner: {
     status: Status;
-  },
+  };
 };
 
 const initialState: PartnerState = {
@@ -47,26 +47,32 @@ const initialState: PartnerState = {
 
 const partnerReducer = createReducer(getPartnersEntity, initialState.partners);
 
-const partnerDetailReducer = handleActions({
-  ['GET_PARTNER_DETAIL_REQUEST']: (state, action) => {
-    return produce(state, draft => {
-      draft.status = 'REQUEST';
-    });
+const partnerDetailReducer = handleActions(
+  {
+    ['GET_PARTNER_DETAIL_REQUEST']: (state, action) => {
+      return produce(state, (draft) => {
+        draft.status = 'REQUEST';
+      });
+    },
+    ['GET_PARTNER_DETAIL_SUCCESS']: (state, action) => {
+      return produce(state, (draft) => {
+        draft.status = 'SUCCESS';
+        draft.item = (action.payload as unknown) as Partner;
+      });
+    },
+    ['GET_PARTNER_DETAIL_FAILURE']: (state, action) => {
+      return produce(state, (draft) => {
+        draft.status = 'FAILURE';
+      });
+    },
   },
-  ['GET_PARTNER_DETAIL_SUCCESS']: (state, action) => {
-    return produce(state, draft => {
-      draft.status = 'SUCCESS';
-      draft.item = action.payload as unknown as Partner;
-    });
-  },
-  ['GET_PARTNER_DETAIL_FAILURE']: (state, action) => {
-    return produce(state, draft => {
-      draft.status = 'FAILURE';
-    });
-  },
-}, initialState.partnerDetail);
+  initialState.partnerDetail,
+);
 
-const applyPartnerReducer = createReducer(applyPartnerEntity, initialState.applyPartner);
+const applyPartnerReducer = createReducer(
+  applyPartnerEntity,
+  initialState.applyPartner,
+);
 
 export default combineReducers({
   partners: partnerReducer,
