@@ -25,7 +25,7 @@ type CartItem = {
 
 const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [date, setDate] = useState("");
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(-1);
   const [list, setList] = useState<ListItem[]>([]);
   const [availId, setAvailId] = useState<number[]>([]);
   const [cart, setCart] = useState<CartItem>({
@@ -44,7 +44,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   }, []);
 
   useEffect(() => {
-    if (!time) return;
+    if (time === -1) return;
     const newItem: ListItem = {
       partnerId: parseInt(match.params.id),
       date,
