@@ -4,12 +4,12 @@ import Container from 'components/Layout/Container';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addReservation } from 'store/pay/action';
-import { Redirect } from 'react-router-dom';
+import { Partner } from 'models/partner';
 import swal from 'sweetalert';
 
 interface Props {
-  partnerInfo: any;
-  timeList: any;
+  partnerInfo: Partner;
+  timeList: number[];
 }
 
 const OrderFormPage: React.FC<Props> = (props: any) => {
@@ -239,6 +239,10 @@ const PageTitle = styled.h2`
 
 const OrderFormWrapper = styled.div`
   display: flex;
+
+  @media screen and (max-width: 1439px) {
+    flex-direction: column;
+  }
 `;
 
 const OrderFormContainer = styled.div`
@@ -282,6 +286,10 @@ const OrderFormGroup = styled.div`
   border-top: 3px solid #25262b;
   border-bottom: 3px solid #25262b;
   padding: 2.5rem 0;
+
+  @media screen and (max-width: 1439px) {
+    max-width: 100%;
+  }
 `;
 
 const OrderFormItem = styled.div`
@@ -334,6 +342,10 @@ const ProductListWrapper = styled.div`
   padding: 2.5rem;
   max-width: 558px;
   width: 100%;
+
+  @media screen and (max-width: 1439px) {
+    max-width: 100%;
+  }
 `;
 
 const RadioLabel = styled.label`
