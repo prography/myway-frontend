@@ -26,3 +26,15 @@ button {
   border: none;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1440px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    font-size: 11px;
+  }
+}

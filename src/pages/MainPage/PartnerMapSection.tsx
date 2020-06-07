@@ -21,7 +21,7 @@ const PartnerMapSection: React.FC<Props> = ({ onModalOpen }) => {
 
   return (
     <Section id="map-section">
-      <div>
+      <div className="naver-map-section">
         {partners.length && (
           <NaverMap placeList={partners} setPartner={selectPartner} />
         )}

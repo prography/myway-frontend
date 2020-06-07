@@ -132,6 +132,54 @@ export const Section = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 1439px) {
+    &#map-section {
+      flex-direction: column-reverse;
+
+      .map-detail-view {
+        padding: 12.1875rem 5.25rem 5.125rem;
+      }
+
+      & > div {
+        width: 100%;
+      }
+
+      .naver-map-section {
+        height: 500px;
+      }
+    }
+
+    &#enroll-section {
+      .shadow {
+        display: none;
+      }
+
+      & > div {
+        flex-direction: column;
+        padding: 0 5rem;
+        align-items: initial;
+      }
+
+      .enroll-detail-view {
+        margin-bottom: 5rem;
+      }
+
+      .enroll-image {
+        width: 100%;
+
+        .spin-image {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    &#main-section {
+      height: 50vh;
+    }
+  }
 `;
 
 /**
@@ -147,6 +195,7 @@ export const SectionTitle = styled('h2')<SectionTitleProps>`
   line-height: 1.5;
   text-align: ${(props) => props.align || 'center'};
   color: ${(props) => (props.color === 'light' ? '#fff' : '#101010')};
+  word-break: keep-all;
 
   /* 색상 하이라이트  */
   span.highlight {
@@ -238,10 +287,28 @@ export const FeatureWrap = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 1439px) {
+    padding: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .featureList {
+      flex-direction: column;
+
+      .featureItem {
+        margin-bottom: 4rem;
+      }
+    }
+  }
 `;
 
 export const MapSectionTitle = styled(SectionTitle)`
   margin-bottom: 20.8125rem;
+
+  @media screen and (max-width: 1439px) {
+    margin-bottom: 10rem;
+  }
 `;
 
 export const PartnerApply = styled.div`
