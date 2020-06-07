@@ -179,6 +179,25 @@ export const Section = styled.div`
     &#main-section {
       height: 50vh;
     }
+
+    &#map-section {
+      .naver-map-section {
+        height: 300px;
+      }
+    }
+
+    &#partner-enroll-section {
+      .partner-view {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        .partner-detail-view {
+          width: 100%;
+          margin-bottom: 3rem;
+        }
+      }
+    }
   }
 `;
 
@@ -221,6 +240,18 @@ export const FloatingBar = styled.div`
     color: #fff;
     font-size: 1.125rem;
     margin-right: 1.5rem;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 0 2rem;
+
+    p {
+      margin-right: 2rem;
+    }
+
+    button {
+      min-width: 100px;
+    }
   }
 `;
 
@@ -365,4 +396,8 @@ export const PartnerEnrollButton = styled(EnrollButton)`
   background-color: #243d87;
   margin-top: 0.62rem;
   border-radius: 55px;
+
+  @media screen and (max-width: 1439px) {
+    font-size: 1rem;
+  }
 `;

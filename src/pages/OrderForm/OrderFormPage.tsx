@@ -247,6 +247,10 @@ const OrderFormWrapper = styled.div`
 
 const OrderFormContainer = styled.div`
   margin-right: 3.9375rem;
+
+  @media screen and (max-width: 1439px) {
+    margin: 0;
+  }
 `;
 
 const PaymentMethodWrap = styled.div`
@@ -297,6 +301,11 @@ const OrderFormItem = styled.div`
   /* justify-content: space-between; */
   align-items: center;
   margin-bottom: 0.625rem;
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: initial;
+  }
 `;
 
 const OrderFormInputTitle = styled.p`
@@ -305,6 +314,7 @@ const OrderFormInputTitle = styled.p`
 `;
 
 const OrderFormInput = styled.input`
+  min-width: 50px;
   font-size: 1.125rem;
   border: solid 1px #bbbbbb;
   background: none;
@@ -345,6 +355,7 @@ const ProductListWrapper = styled.div`
 
   @media screen and (max-width: 1439px) {
     max-width: 100%;
+    padding: 1.5rem;
   }
 `;
 
@@ -362,6 +373,10 @@ const ProductsContainer = styled.div``;
 const ProductItemWrapper = styled.div`
   margin-bottom: 20px;
   display: flex;
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 const ProductItemImage = styled.div`

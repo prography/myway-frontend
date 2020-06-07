@@ -10,9 +10,13 @@ const CotainerWrap = styled.div`
   max-width: 1220px;
   margin: 0 auto;
 
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1439px) {
     padding: 0 3rem;
     max-width: 100%;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 0 1rem;
   }
 `;
 
