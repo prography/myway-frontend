@@ -26,6 +26,10 @@ export default OrderComplete;
 
 const CompleteWrapper = styled.div`
   padding: 6.25rem 14.25rem;
+
+  @media screen and (max-width: 767px) {
+    padding: 6.25rem 1.0rem;
+  }
 `;
 
 const CompleteTitle = styled.h2`
