@@ -17,6 +17,5 @@ export const addReservation = async (params: AddReservationParams) => {
   const { data } = await fetcher.post('/ad-reservations', params, {
     headers,
   });
-
-  return data.data;
+  return data.data.adReservationId;
 };

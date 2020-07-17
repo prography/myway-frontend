@@ -5,12 +5,14 @@ import { addReservationEntity } from 'store/pay/action';
 export type PayState = {
   addReservation: {
     status: Status;
+    items: number;
   };
 };
 
 const initialState: PayState = {
   addReservation: {
     status: 'INIT',
+    items: 0,
   },
 };
 
