@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from 'utils/redux';
-import { addReservationEntity } from 'store/pay/action';
+import { uploadAdEntity } from 'store/ad/action';
 
 export type AdState = {
   uploadAd: {
@@ -15,7 +15,7 @@ const initialState: AdState = {
 };
 
 const uploadAdReducer = createReducer(
-  addReservationEntity,
+  uploadAdEntity,
   initialState.uploadAd,
 );
 
