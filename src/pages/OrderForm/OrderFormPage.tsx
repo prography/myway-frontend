@@ -143,7 +143,7 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
                 </OrderFormItem>
                 <OrderFormItem>
                   <OrderFormInputTitle>광고</OrderFormInputTitle>
-                  <OrderFormInput name="ad" type="file" ref={register} onChange={(e) => console.log(e.currentTarget.files)} />
+                  <OrderFormInput name="ad" type="file" ref={register} />
                 </OrderFormItem>
                 {/* <OrderFormItem>
                   <OrderFormInputTitle>지출증빙</OrderFormInputTitle>
