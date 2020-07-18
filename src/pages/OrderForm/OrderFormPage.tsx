@@ -15,22 +15,22 @@ interface Props {
 
 const OrderFormPage: React.FC<Props> = (props: any) => {
   const dispatch = useDispatch();
+  const [fileState, setFileState] = useState('');
   const [payMethod, setPayMethod] = useState<
     undefined | 'card' | 'deposit' | 'transfer'
   >('card');
   const reservationId = useSelector(
     (state: StoreState) => state.pay.addReservation.items
   );
-  const formData = new FormData();
 
   useEffect(() => {
     if (reservationId === 0) return;
-    dispatch(
-      uploadAd({
-        id: reservationId,
-        file: formData,
-      }),
-    );
+    // dispatch(
+    //   uploadAd({
+    //     id: reservationId,
+    //     file: formState,
+    //   }),
+    // );
   }, [reservationId])
 
   const { register, handleSubmit } = useForm();
@@ -47,6 +47,12 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
     [],
   );
 
+  const handleFileChange = (e: any) => {
+    const file = e.target.files;
+
+    setFileState(file[0]);
+  }
+
   const onSubmit = (data: any) => {
     const { company_name, tel_1, tel_2, tel_3, email, ad } = data;
 
@@ -55,9 +61,23 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
       return;
     }
 
-    formData.append('file', ad);
+    const formData = new FormData();
+
+    formData.append('ad-img', ad[0]);
+
+    // files.forEach((file: any) => {
+    //   formData.append('ad-img', file);
+    // });
+
+    dispatch(
+      uploadAd({
+        id: 23,
+        file: formData,
+      }),
+    );
 
     const { IMP } = window;
+
 
     IMP.request_pay(
       {
@@ -143,7 +163,7 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
                 </OrderFormItem>
                 <OrderFormItem>
                   <OrderFormInputTitle>광고</OrderFormInputTitle>
-                  <OrderFormInput name="ad" type="file" ref={register} />
+                  <OrderFormInput name="ad" type="file" ref={register} onChange={handleFileChange} />
                 </OrderFormItem>
                 {/* <OrderFormItem>
                   <OrderFormInputTitle>지출증빙</OrderFormInputTitle>

@@ -7,10 +7,10 @@ export interface UploadAdParams {
 }
 
 export const uploadAd = async (params: UploadAdParams) => {
-  const { id } = params;
+  const { id, file } = params;
   const token = getAuthToken();
-  const headers = token ? { 'x-access-token': token } : {};
-  const { data } = await fetcher.put(`/ad-reservations/${id}/ad-imgs`, params.file, { headers });
+  const headers = token ? { 'x-access-token': token, 'content-type': 'multipart/form-data' } : {};
+  const { data } = await fetcher.put(`/ad-reservations/${id}/ad-imgs`, file, { headers });
 
   return data.data;
 };
