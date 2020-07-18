@@ -98,10 +98,6 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
 
     CartHelper.addCart(JSON.stringify(cart));
     window.alert(`${list.length}개의 상품이 장바구니에 담겼습니다 !`);
-    setDate("");
-    setTime(0);
-    setList([]);
-    setAvailId([]);
   };
 
   return (
