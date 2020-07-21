@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { adReservationInfo } from 'models/reservationInfo';
 
-const OrderInfo = () => {
+type Props = {
+  info: adReservationInfo;
+};
+
+const OrderInfo: React.FC<Props> = ({ info }) => {
   return (
     <>
       <InfoName>주문 정보</InfoName>
@@ -22,7 +27,7 @@ const OrderInfo = () => {
         </Contact>
         <Pay>
           <div>결제금액</div>
-          <div>4,000원</div>
+          <div>{info.paidAmount.toLocaleString()}원</div>
         </Pay>
       </Info>
     </>

@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { adReservationInfo } from 'models/reservationInfo';
 
-const OrderTable = () => {
+type Props = {
+  info: adReservationInfo;
+};
+
+const OrderTable: React.FC<Props> = ({ info }) => {
   return (
     <>
       <OrderTitle>
@@ -9,33 +14,23 @@ const OrderTable = () => {
         <div>시간</div>
         <div>주문금액</div>
       </OrderTitle>
-      <OrderItem>
-        <OrderPlace>
-          <PlaceImg src={`https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg`} />
-          <div>
-            <PlaceName>강남역 카페</PlaceName>
-            <div>서울시 강남구</div>
-            <div>010-1111-2222</div>
-          </div>
-        </OrderPlace>
-        <OrderTime>3</OrderTime>
-        <OrderPrice>3,000원</OrderPrice>
-      </OrderItem>
-      <OrderItem>
-        <OrderPlace>
-          <PlaceImg src={`https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg`} />
-          <div>
-            <PlaceName>강남역 카페</PlaceName>
-            <div>서울시 강남구</div>
-            <div>010-1111-2222</div>
-          </div>
-        </OrderPlace>
-        <OrderTime>3</OrderTime>
-        <OrderPrice>3,000원</OrderPrice>
-      </OrderItem>
+      {info.adTimeTables.map((item, index) => (
+        <OrderItem key={index}>
+          <OrderPlace>
+            <PlaceImg src={item.partnerImgUrl} />
+            <div>
+              <PlaceName>{item.partnerStoreName}</PlaceName>
+              <div>{item.partnerAddress}</div>
+              <div>{item.partnerPhone}</div>
+            </div>
+          </OrderPlace>
+          <OrderTime>{item.adDate}<br />{item.adHour}시 ~ {item.adHour + 1}시</OrderTime>
+          <OrderPrice>{item.partnerPricePerHour.toLocaleString()}원</OrderPrice>
+        </OrderItem>
+      ))}
       <TotalPrice>
         <div>총 결제금액</div>
-        <div>무통장 입금 / 4,000원</div>
+        <div>{info.paidAmount.toLocaleString()}원</div>
       </TotalPrice>
     </>
   );

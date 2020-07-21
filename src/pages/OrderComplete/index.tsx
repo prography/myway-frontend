@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import OrderTable from './OrderTable';
 import OrderInfo from './OrderInfo';
+import { getReservationInfo } from 'store/pay/action';
 
-const OrderComplete = () => {
+const OrderComplete = (props: any) => {
+  const dispatch = useDispatch();
+  const adReservationInfo = useSelector(
+    (state: StoreState) => state.pay.getReservationInfo.items.adReservationInfo
+  );
+
+  useEffect(() => {
+    if (!props.location.state?.reservationId) return;
+    dispatch(
+      getReservationInfo(props.location.state?.reservationId.adReservationId)
+    );
+  }, []);
+
+  if (!props.location.state?.reservationId) return <BlockLabel>권한이 없습니다.</BlockLabel>;
 
   return (
     <CompleteWrapper>
       <CompleteTitle>주문이 완료되었습니다</CompleteTitle>
       <CompleteDesc>
         {new Date().getFullYear()}년 {new Date().getMonth() + 1}월 {new Date().getDate()}일에 주문하신 주문번호는
-        <span> 0123456789 </span>입니다
+        <span> {adReservationInfo.adReservationId} </span>입니다
       </CompleteDesc>
-      <OrderTable />
-      <OrderInfo />
+      <OrderTable info={adReservationInfo} />
+      <OrderInfo info={adReservationInfo} />
       <ButtonWrapper>
         <Button>주문내역 확인</Button>
         <Button color="orange">쇼핑 계속하기</Button>
@@ -23,6 +38,12 @@ const OrderComplete = () => {
 }
 
 export default OrderComplete;
+
+const BlockLabel = styled.p`
+  font-size: 36px;
+  text-align: center;
+  padding: 100px 0;
+`;
 
 const CompleteWrapper = styled.div`
   padding: 6.25rem 14.25rem;

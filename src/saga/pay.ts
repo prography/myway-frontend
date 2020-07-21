@@ -4,9 +4,13 @@ import {
   addReservationEntity,
   ADD_RESERVATION,
   AddReservation,
+  getReservationInfoEntity,
+  GET_RESERVATION_INFO,
+  GetReservationInfo,
 } from 'store/pay/action';
 
 const fetchAddReservation = fetchEntity(addReservationEntity);
+const fetchGetReservationInfo = fetchEntity(getReservationInfoEntity);
 
 function* watchAddReservation() {
   while (true) {
@@ -15,6 +19,13 @@ function* watchAddReservation() {
   }
 }
 
+function* watchGetReservationInfo() {
+  while (true) {
+    const { reservationId }: GetReservationInfo = yield take(GET_RESERVATION_INFO);
+    yield call(fetchGetReservationInfo, reservationId);
+  }
+}
+
 export default function* paySaga() {
-  yield all([fork(watchAddReservation)]);
+  yield all([fork(watchAddReservation), fork(watchGetReservationInfo)]);
 }

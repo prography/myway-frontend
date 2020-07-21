@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import Container from 'components/Layout/Container';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addReservation } from 'store/pay/action';
 import { Partner } from 'models/partner';
 import swal from 'sweetalert';
@@ -20,6 +21,10 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
 
   const { register, handleSubmit } = useForm();
   const { partnerInfo, timeList } = props;
+
+  const reservationId = useSelector(
+    (state: StoreState) => state.pay.addReservation.items
+  );
 
   const OrderPrice = useMemo(() => {
     return partnerInfo.pricePerHour * timeList.length;
@@ -78,11 +83,19 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
         }
 
         await swal('결제 완료', '결제가 완료되었습니다.', 'success');
-
-        window.location.href = '/';
       },
     );
   };
+
+  if (reservationId !== 0) {
+    return (
+      <Redirect to={{
+        pathname: '/orderComplete',
+        state: { reservationId },
+      }}
+      />
+    );
+  }
 
   return (
     <PlacesWrapper>
