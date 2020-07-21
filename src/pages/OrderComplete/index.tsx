@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OrderTable from './OrderTable';
 import OrderInfo from './OrderInfo';
@@ -31,7 +32,9 @@ const OrderComplete = (props: any) => {
       <OrderInfo info={adReservationInfo} />
       <ButtonWrapper>
         <Button>주문내역 확인</Button>
-        <Button color="orange">쇼핑 계속하기</Button>
+        <Button color="orange">
+          <Link to="/places" style={{ color: '#ffffff' }}>쇼핑 계속하기</Link>
+        </Button>
       </ButtonWrapper>
     </CompleteWrapper>
   );
