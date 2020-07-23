@@ -51,8 +51,6 @@ const CartPage = () => {
     onChange: onSelectChange,
   };
 
-  console.log(selectedRowKeys);
-
   return (
     <PlacesWrapper>
       <PageTitle>장바구니</PageTitle>
