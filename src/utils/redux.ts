@@ -42,6 +42,7 @@ export const createReducer = (
         });
       },
       [entity.success.type]: (state, action) => {
+        console.log(action);
         return produce(state, (draft) => {
           draft.status = 'SUCCESS';
           draft.items = action.payload;
