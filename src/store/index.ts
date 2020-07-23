@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import PartnerReducer, { PartnerState } from 'store/partner';
 import AuthReducer, { AuthState } from 'store/auth';
-import cartInfoReducer, { CartState } from 'store/cart';
+import CartInfoReducer, { CartState } from 'store/cart';
 import PayReducer, { PayState } from 'store/pay';
 import AdReducer, { AdState } from 'store/ad';
 
@@ -16,7 +16,7 @@ export type RootState = {
 export default combineReducers({
   partner: PartnerReducer,
   auth: AuthReducer,
-  cart: cartInfoReducer,
+  cart: CartInfoReducer,
   pay: PayReducer,
   ad: AdReducer,
 });
