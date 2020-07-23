@@ -1,9 +1,11 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import Container from 'components/Layout/Container';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addReservation } from 'store/pay/action';
+import { uploadAd } from 'store/ad/action';
 import { Partner } from 'models/partner';
 import swal from 'sweetalert';
 
@@ -14,12 +16,27 @@ interface Props {
 
 const OrderFormPage: React.FC<Props> = (props: any) => {
   const dispatch = useDispatch();
+  const [fileState, setFileState] = useState<FormData>();
   const [payMethod, setPayMethod] = useState<
     undefined | 'card' | 'deposit' | 'transfer'
   >('card');
 
   const { register, handleSubmit } = useForm();
   const { partnerInfo, timeList } = props;
+
+  const reservationId = useSelector(
+    (state: StoreState) => state.pay.addReservation.items
+  );
+
+  useEffect(() => {
+    if (reservationId === 0) return;
+    dispatch(
+      uploadAd({
+        id: reservationId,
+        file: fileState,
+      }),
+    );
+  }, [reservationId]);
 
   const OrderPrice = useMemo(() => {
     return partnerInfo.pricePerHour * timeList.length;
@@ -33,14 +50,20 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
   );
 
   const onSubmit = (data: any) => {
-    const { company_name, tel_1, tel_2, tel_3, email } = data;
+    const { company_name, tel_1, tel_2, tel_3, email, ad } = data;
 
-    if (!company_name || !tel_1 || !tel_2 || !tel_3 || !email) {
+    if (!company_name || !tel_1 || !tel_2 || !tel_3 || !email || !ad) {
       alert('항목을 전부 입력해주세요');
       return;
     }
 
+    const formData = new FormData();
+
+    formData.append('ad-img', ad[0]);
+    setFileState(formData);
+
     const { IMP } = window;
+
 
     IMP.request_pay(
       {
@@ -78,11 +101,19 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
         }
 
         await swal('결제 완료', '결제가 완료되었습니다.', 'success');
-
-        window.location.href = '/';
       },
     );
   };
+
+  if (reservationId !== 0) {
+    return (
+      <Redirect to={{
+        pathname: '/orderComplete',
+        state: { reservationId },
+      }}
+      />
+    );
+  }
 
   return (
     <PlacesWrapper>
@@ -123,6 +154,10 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
                   {/* <OrderFormInput name="emailId" />
                   <NumberBar>@</NumberBar>
                   <OrderFormInput name="emailDomain" placeholder="직접입력" /> */}
+                </OrderFormItem>
+                <OrderFormItem>
+                  <OrderFormInputTitle>광고</OrderFormInputTitle>
+                  <OrderFormInput name="ad" type="file" ref={register} />
                 </OrderFormItem>
                 {/* <OrderFormItem>
                   <OrderFormInputTitle>지출증빙</OrderFormInputTitle>
