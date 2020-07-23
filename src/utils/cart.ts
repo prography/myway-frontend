@@ -1,61 +1,60 @@
-type cookieName = string;
-type cookieValue = string | number;
-
-interface setCookie {
-  cookieName: cookieName;
-  cookieValue: cookieValue;
-  days: number;
-}
+import { Cart } from 'models/cart';
+import CookieHelper, { setCookie } from 'utils/cookie';
+import _ from 'lodash';
 
 class CartHelper {
   private CART_COOKIE_NAME = 'ADD_CART_ID';
 
-  private get cartList(): string[] {
-    const cookie = this.getCookie(this.CART_COOKIE_NAME);
+  public getCartList() {
+    const cookie = CookieHelper.getCookie(this.CART_COOKIE_NAME);
 
     if (!cookie) {
       return [];
     }
 
-    return cookie.split(':');
+    return JSON.parse(cookie);
   }
 
-  private setCookie({ cookieName, cookieValue, days }: setCookie) {
-    // 쿠키 유효기간 설정
-    const exdate = new Date();
-    exdate.setDate(exdate.getDate() + days);
+  public get cartList(): Cart[] {
+    const cookie = CookieHelper.getCookie(this.CART_COOKIE_NAME);
 
-    const value = `${escape(cookieValue.toString())}${
-      days == null ? '' : `;    expires=${exdate.toUTCString()}`
-    }`;
-
-    document.cookie = `${cookieName}=${value}`;
-  }
-
-  private getCookie(cookieName: string) {
-    const cookies = document.cookie.split(';');
-
-    for (let i = 0; i < cookies.length; i++) {
-      const currentCookie = cookies[i];
-      const name = currentCookie
-        .substr(0, currentCookie.indexOf('='))
-        .replace(/^\s+|\s+$/g, '');
-      const value = currentCookie.substr(currentCookie.indexOf('=') + 1);
-
-      if (cookieName === name) {
-        return unescape(value);
-      }
+    if (!cookie) {
+      return [];
     }
+
+    return JSON.parse(cookie);
   }
 
-  public addCart(cookieValue: string) {
+  private getAvailIdsByPartnerId(cartData: Cart): Cart[] {
+    const { partnerId: id } = cartData;
+
+    const cartItem = this.cartList.find(({ partnerId }) => partnerId === id);
+
+    if (cartItem === undefined) {
+      return [...this.cartList, cartData];
+    }
+
+    return this.cartList.map(({ partnerId, adTimeIds }) => {
+      return partnerId === id
+        ? {
+            partnerId,
+            adTimeIds: _.uniq([...adTimeIds, ...cartData.adTimeIds]),
+          }
+        : { partnerId, adTimeIds };
+    });
+  }
+
+  public addCart(cookieValue: Cart) {
+    const { partnerId, adTimeIds: availId } = cookieValue;
+    const setCookieData = this.getAvailIdsByPartnerId(cookieValue);
+
     const setData: setCookie = {
       cookieName: this.CART_COOKIE_NAME,
-      cookieValue,
+      cookieValue: JSON.stringify(setCookieData),
       days: 1,
     };
 
-    this.setCookie(setData);
+    CookieHelper.setCookie(setData);
   }
 
   public removeCart(id: number) {

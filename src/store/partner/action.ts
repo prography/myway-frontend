@@ -5,13 +5,16 @@ export const GET_PARTNERS = 'GET_PARTNERS';
 export const GET_PARTNER_DETAIL = 'GET_PARTNER_DETAIL';
 export const APPLY_PARTNER = 'APPLY_PARTNER';
 
-export const getPartnersEntity = createEntity(GET_PARTNERS, partnerApi.getPartners);
+export const getPartnersEntity = createEntity(
+  GET_PARTNERS,
+  partnerApi.getPartners,
+);
 export const getPartners = () => ({
   type: GET_PARTNERS,
 });
 
 export const getPartnerDetailEntity = createEntity(
-  GET_PARTNER_DETAIL, 
+  GET_PARTNER_DETAIL,
   partnerApi.getPartnerDetail,
 );
 export const getPartnerDetail = (id: number) => ({

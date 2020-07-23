@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -16,26 +16,26 @@ type ListItem = {
   partnerId: number;
   date: string;
   time: number;
-}
+};
 
 type CartItem = {
   partnerId: number;
-  availId: number[];
-}
+  adTimeIds: number[];
+};
 
 const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState('');
   const [time, setTime] = useState(-1);
   const [list, setList] = useState<ListItem[]>([]);
   const [availId, setAvailId] = useState<number[]>([]);
   const [cart, setCart] = useState<CartItem>({
     partnerId: parseInt(match.params.id),
-    availId: [],
+    adTimeIds: [],
   });
 
   const dispatch = useDispatch();
   const detailInfo = useSelector(
-    (state: StoreState) => state.partner.partnerDetail.item
+    (state: StoreState) => state.partner.partnerDetail.item,
   );
 
   useEffect(() => {
@@ -54,11 +54,11 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   }, [time]);
 
   useEffect(() => {
-    setCart({ ...cart, ['availId']: availId });
+    setCart({ ...cart, ['adTimeIds']: availId });
   }, [availId]);
 
   const handleCheckSelected = (id: number) => {
-    if (availId.some(item => item === id)) {
+    if (availId.some((item) => item === id)) {
       window.alert('이미 선택된 옵션입니다 !');
       return false;
     }
@@ -70,7 +70,9 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
   };
 
   const handleChangeTime = (e: ChangeEvent<HTMLInputElement>) => {
-    const check = handleCheckSelected(JSON.parse(e.currentTarget.value).availId);
+    const check = handleCheckSelected(
+      JSON.parse(e.currentTarget.value).availId,
+    );
     if (check) {
       setTime(JSON.parse(e.currentTarget.value).adHour);
       setAvailId([...availId, JSON.parse(e.currentTarget.value).availId]);
@@ -79,14 +81,14 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
 
   const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
     setList(
-      list.filter((item, idx) =>
-        idx !== parseInt(e.currentTarget.dataset.id || '')
-      )
+      list.filter(
+        (item, idx) => idx !== parseInt(e.currentTarget.dataset.id || ''),
+      ),
     );
     setAvailId(
-      availId.filter((item, idx) =>
-        idx !== parseInt(e.currentTarget.dataset.id || '')
-      )
+      availId.filter(
+        (item, idx) => idx !== parseInt(e.currentTarget.dataset.id || ''),
+      ),
     );
   };
 
@@ -96,7 +98,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
       return;
     }
 
-    CartHelper.addCart(JSON.stringify(cart));
+    CartHelper.addCart(cart);
     window.alert(`${list.length}개의 상품이 장바구니에 담겼습니다 !`);
   };
 
@@ -124,7 +126,7 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
               id="date"
               type="date"
               value={date}
-              min={new Date().toISOString().split("T", 1).toString()}
+              min={new Date().toISOString().split('T', 1).toString()}
               onChange={handleChangeDate}
             />
           </Option>
@@ -141,33 +143,44 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
             <SelectionWrapper key={idx}>
               <div>선택 {idx + 1}</div>
               <div>
-                {detailInfo.name} / {item.date} / {item.time}:00 ~ {item.time + 1}:00
-                <DelButton data-id={idx} onClick={handleDelete}>X</DelButton>
+                {detailInfo.name} / {item.date} / {item.time}:00 ~{' '}
+                {item.time + 1}:00
+                <DelButton data-id={idx} onClick={handleDelete}>
+                  X
+                </DelButton>
               </div>
             </SelectionWrapper>
           ))}
           <ThinHr />
           <PriceWrapper>
             <PriceTitle>총 결제금액</PriceTitle>
-            <Price>{(list.length * detailInfo.pricePerHour).toLocaleString()}원 ({list.length}시간) </Price>
+            <Price>
+              {(list.length * detailInfo.pricePerHour).toLocaleString()}원 (
+              {list.length}시간){' '}
+            </Price>
           </PriceWrapper>
           <ThinHr />
           <PayWrapper>
             <Button onClick={handleAddCart}>장바구니 담기</Button>
-            <Button color="black" disabled={!cart.availId.length}>
-              {cart.availId.length ? (<Link to={{
-                pathname: '/orderForm',
-                state: {
-                  payInfo: {
-                    partnerInfo: detailInfo,
-                    timeList: cart.availId,
-                  }
-                }
-              }}
-                style={{ color: '#ffffff' }}
-              >
-                바로 구매하기
-              </Link>) : '바로 구매하기'}
+            <Button color="black" disabled={!cart.adTimeIds.length}>
+              {cart.adTimeIds.length ? (
+                <Link
+                  to={{
+                    pathname: '/orderForm',
+                    state: {
+                      payInfo: {
+                        partnerInfo: detailInfo,
+                        timeList: cart.adTimeIds,
+                      },
+                    },
+                  }}
+                  style={{ color: '#ffffff' }}
+                >
+                  바로 구매하기
+                </Link>
+              ) : (
+                '바로 구매하기'
+              )}
             </Button>
           </PayWrapper>
           <Hr />
@@ -189,7 +202,7 @@ const DetailContainer = styled.div`
 
 const PageTitle = styled.h2`
   font-size: 0.875rem;
-  font-family:NotoSansCJKkr-DemiLight;
+  font-family: NotoSansCJKkr-DemiLight;
   color: #101010;
   text-align: left;
   margin-bottom: 1.56rem;
@@ -251,7 +264,7 @@ const ThinHr = styled.hr`
 const Option = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1.0rem 0;
+  margin: 1rem 0;
 `;
 
 const OptionTitle = styled.h2`
@@ -264,13 +277,13 @@ const SelectionWrapper = styled.div`
   justify-content: space-between;
   font-size: 1.125rem;
   font-family: Noto Sans KR Thin;
-  margin: 1.0rem 0;
+  margin: 1rem 0;
 `;
 
 const PriceWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1.0rem 0;
+  margin: 1rem 0;
 `;
 
 const PriceTitle = styled.h2`
@@ -289,13 +302,14 @@ const PayWrapper = styled.div`
   margin: 0.5rem 0;
 `;
 
-const Button = styled('button') <{ color?: string }>`
+const Button = styled('button')<{ color?: string }>`
   width: 49%;
   display: flex;
   margin: 0.25rem;
   padding: 0.875rem 2.75rem;
-  background-color: ${(props) => props.color === 'black' ? '#000000' : '#ffffff'};
-  color: ${(props) => props.color === 'black' ? '#ffffff' : '#25262b'};
+  background-color: ${(props) =>
+    props.color === 'black' ? '#000000' : '#ffffff'};
+  color: ${(props) => (props.color === 'black' ? '#ffffff' : '#25262b')};
   ${(props) => props.color || `border: solid 1px #929295;`};
   font-size: 1.125rem;
   border-radius: 3px;

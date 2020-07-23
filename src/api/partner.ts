@@ -1,5 +1,6 @@
 import fetcher from 'utils/fetcher';
 import { Partner } from 'models/partner';
+import { Cart } from 'models/cart';
 
 export const getPartners = async () => {
   const { data } = await fetcher.get<{ arr: Partner[] }>('/partners');
@@ -19,10 +20,18 @@ export interface ApplyPartnerParams {
   ownerName: string;
   storeName: string;
   content: string;
-};
+}
 
 export const applyPartner = async (params: ApplyPartnerParams) => {
-  const { data } = await fetcher.post('/apply-partner',  params );
-  
+  const { data } = await fetcher.post('/apply-partner', params);
+
   return data;
+};
+
+export const getCartInfo = async (params: Cart[]) => {
+  const { data } = await fetcher.post('/cart-info', {
+    basicCartInfo: params,
+  });
+
+  return data.arr;
 };
