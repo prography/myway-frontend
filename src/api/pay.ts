@@ -28,6 +28,6 @@ export const getReservationInfo = async (reservationId: number) => {
   const { data } = await fetcher.get<{ data: reservationInfo }>(`/ad-reservations/${reservationId}/info`, {
     headers,
   });
-  console.log(data.data)
+
   return data.data;
 }
