@@ -20,6 +20,10 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
   const [payMethod, setPayMethod] = useState<
     undefined | 'card' | 'deposit' | 'transfer'
   >('card');
+
+  const { register, handleSubmit } = useForm();
+  const { partnerInfo, timeList } = props;
+
   const reservationId = useSelector(
     (state: StoreState) => state.pay.addReservation.items
   );
@@ -33,13 +37,6 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
       }),
     );
   }, [reservationId]);
-
-  const { register, handleSubmit } = useForm();
-  const { partnerInfo, timeList } = props;
-
-  const reservationId = useSelector(
-    (state: StoreState) => state.pay.addReservation.items
-  );
 
   const OrderPrice = useMemo(() => {
     return partnerInfo.pricePerHour * timeList.length;

@@ -15,7 +15,7 @@ const OrderComplete = (props: any) => {
   useEffect(() => {
     if (!props.location.state?.reservationId) return;
     dispatch(
-      getReservationInfo(props.location.state?.reservationId.adReservationId)
+      getReservationInfo(props.location.state?.reservationId)
     );
   }, []);
 
