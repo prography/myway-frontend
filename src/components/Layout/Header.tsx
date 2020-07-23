@@ -31,6 +31,9 @@ const Header = () => {
             <li>
               <Link to="/places">플레이스</Link>
             </li>
+            <li>
+              <Link to="/cart">장바구니</Link>
+            </li>
             {!isLoggedIn ? (
               <>
                 <li>
