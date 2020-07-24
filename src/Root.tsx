@@ -20,7 +20,7 @@ const Root = () => {
 
   useEffect(() => {
     const token = getAuthToken()?.toString();
-    dispatch(me(token));
+    if (token) dispatch(me(token));
   }, []);
 
   return (
