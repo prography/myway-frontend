@@ -6,27 +6,34 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { addReservation } from 'store/pay/action';
 import { uploadAd } from 'store/ad/action';
-import { Partner } from 'models/partner';
+import { CartInfo } from 'models/cart';
 import swal from 'sweetalert';
 
-interface Props {
-  partnerInfo: Partner;
-  timeList: number[];
+type Props = {
+  payInfo: CartInfo[];
 }
 
-const OrderFormPage: React.FC<Props> = (props: any) => {
+const OrderFormPage: React.FC<Props> = ({ payInfo }) => {
   const dispatch = useDispatch();
   const [fileState, setFileState] = useState<FormData>();
   const [payMethod, setPayMethod] = useState<
     undefined | 'card' | 'deposit' | 'transfer'
   >('card');
+  const [idList, setIdList] = useState<number[]>([]);
 
   const { register, handleSubmit } = useForm();
-  const { partnerInfo, timeList } = props;
 
   const reservationId = useSelector(
     (state: StoreState) => state.pay.addReservation.items
   );
+
+  useEffect(() => {
+    let id: number[] = [];
+    payInfo.forEach((item) => {
+      id = id.concat(item.timeList);
+    });
+    setIdList(id);
+  }, []);
 
   useEffect(() => {
     if (reservationId === 0) return;
@@ -39,8 +46,12 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
   }, [reservationId]);
 
   const OrderPrice = useMemo(() => {
-    return partnerInfo.pricePerHour * timeList.length;
-  }, [partnerInfo, timeList]);
+    let totalPrice = 0;
+    payInfo.forEach((item) => {
+      totalPrice += item.partnerInfo.pricePerHour * item.timeList.length;
+    });
+    return totalPrice;
+  }, []);
 
   const handleClickPaymentMethodBtn = useCallback(
     (method: 'card' | 'deposit' | 'transfer') => {
@@ -63,7 +74,6 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
     setFileState(formData);
 
     const { IMP } = window;
-
 
     IMP.request_pay(
       {
@@ -89,18 +99,16 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
               paidAmount: rsp.paid_amount,
               pgTid: rsp.pg_tid,
               paidAt: rsp.paid_at,
-              adTimes: timeList,
+              adTimes: idList,
             }),
           );
-
           // 결제 성공 시 로직,
+          await swal('결제 완료', '결제가 완료되었습니다.', 'success');
         } else {
           console.log(rsp);
           console.log('error');
           // 결제 실패 시 로직,
         }
-
-        await swal('결제 완료', '결제가 완료되었습니다.', 'success');
       },
     );
   };
@@ -231,20 +239,25 @@ const OrderFormPage: React.FC<Props> = (props: any) => {
             <ProductListWrapper>
               <SecitonTitle>제품정보</SecitonTitle>
               <ProductsContainer>
-                <ProductItemWrapper>
-                  <ProductItemImage>
-                    <img src={partnerInfo.imgUrl} />
-                  </ProductItemImage>
-                  <ProductItemInfoContainer>
-                    <ProductItemTitle>{partnerInfo.name}</ProductItemTitle>
-                    <ProductItemAddress>
-                      {partnerInfo.address}
-                    </ProductItemAddress>
-                    <ProductItemPrice>
-                      {partnerInfo.pricePerHour}원 / 시간
-                    </ProductItemPrice>
-                  </ProductItemInfoContainer>
-                </ProductItemWrapper>
+                {payInfo.map((item, index) => {
+                  return (
+                    <ProductItemWrapper key={index}>
+                      <ProductItemImage>
+                        <img src={item.partnerInfo.imgUrl} />
+                      </ProductItemImage>
+                      <ProductItemInfoContainer>
+                        <ProductItemTitle>{item.partnerInfo.name}</ProductItemTitle>
+                        <ProductItemAddress>
+                          {item.partnerInfo.address}
+                        </ProductItemAddress>
+                        <ProductItemPrice>
+                          {item.partnerInfo.pricePerHour}원/시간  X  {item.timeList.length}시간
+                          = {item.partnerInfo.pricePerHour * item.timeList.length}원
+                        </ProductItemPrice>
+                      </ProductItemInfoContainer>
+                    </ProductItemWrapper>
+                  );
+                })}
               </ProductsContainer>
               <PriceResultWrapper>
                 <span>총 결제금액</span>

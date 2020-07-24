@@ -37,9 +37,9 @@ class CartHelper {
     return this.cartList.map(({ partnerId, adTimeIds }) => {
       return partnerId === id
         ? {
-            partnerId,
-            adTimeIds: _.uniq([...adTimeIds, ...cartData.adTimeIds]),
-          }
+          partnerId,
+          adTimeIds: _.uniq([...adTimeIds, ...cartData.adTimeIds]),
+        }
         : { partnerId, adTimeIds };
     });
   }

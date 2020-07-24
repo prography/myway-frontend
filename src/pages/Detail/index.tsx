@@ -168,10 +168,10 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
                   to={{
                     pathname: '/orderForm',
                     state: {
-                      payInfo: {
+                      payInfo: [{
                         partnerInfo: detailInfo,
                         timeList: cart.adTimeIds,
-                      },
+                      }],
                     },
                   }}
                   style={{ color: '#ffffff' }}
@@ -179,8 +179,8 @@ const Detail: React.FC<RouteComponentProps<MatchParams>> = ({ match }) => {
                   바로 구매하기
                 </Link>
               ) : (
-                '바로 구매하기'
-              )}
+                  '바로 구매하기'
+                )}
             </Button>
           </PayWrapper>
           <Hr />
@@ -302,7 +302,7 @@ const PayWrapper = styled.div`
   margin: 0.5rem 0;
 `;
 
-const Button = styled('button')<{ color?: string }>`
+const Button = styled('button') <{ color?: string }>`
   width: 49%;
   display: flex;
   margin: 0.25rem;

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import Container from 'components/Layout/Container';
 import { Table } from 'antd';
 
 import CartHelper from 'utils/cart';
 import useCartInfo from 'hooks/useCartInfo';
+import { Partner } from 'models/partner';
 
 import 'antd/dist/antd.css';
 
@@ -15,9 +17,11 @@ const columns = [
     key: 'partnerInfo',
     render: (partnerInfo: any) => (
       <PartnerInfoContainer>
-        <StyledImage src={partnerInfo.partnerImgUrl} />
+        <StyledImage src={partnerInfo.imgUrl} />
         <PartnerInfo>
-          <PartnerStoreName>{partnerInfo.partnerStoreName}</PartnerStoreName>
+          <PartnerStoreName>{partnerInfo.name}</PartnerStoreName>
+          <PartnerStoreDetail>{partnerInfo.address}</PartnerStoreDetail>
+          <PartnerStoreDetail>{partnerInfo.pricePerHour}원 / 시간</PartnerStoreDetail>
         </PartnerInfo>
       </PartnerInfoContainer>
     ),
@@ -38,8 +42,25 @@ const columns = [
   },
 ];
 
+// type Time = {
+//   adDate: string;
+//   adHour: number;
+//   id: number;
+// };
+
+// type Row = {
+//   partnerInfo: {
+//     partnerImgUrl: string;
+//     partnerStoreName: string;
+//   },
+//   partnerInfo: Partner;
+//   adTimeInfo: Time[];
+// };
+
 const CartPage = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<any[]>([]);
+  const [payInfo, setPayInfo] = useState<any[]>([]);
+  const [redirect, setRedirect] = useState(false);
   const cartInfo = useCartInfo(CartHelper.cartList);
 
   const onSelectChange = (selectedRowKeys: any) => {
@@ -51,6 +72,38 @@ const CartPage = () => {
     onChange: onSelectChange,
   };
 
+  useEffect(() => {
+    const items: any[] = [];
+    cartInfo.forEach((item: any) => {
+      if (selectedRowKeys.includes(item.partnerInfo.id)) {
+        const id: number[] = [];
+        item.adTimeInfo.forEach((i: any) => {
+          id.push(i.id);
+        });
+        items.push({ partnerInfo: item.partnerInfo, timeList: id });
+      };
+    });
+    setPayInfo(items);
+  }, [selectedRowKeys]);
+
+  const handleGoPay = () => {
+    if (selectedRowKeys.length === 0) {
+      window.alert('결제할 상품을 선택해주세요 !');
+      return;
+    }
+    setRedirect(true);
+  };
+
+  if (redirect) {
+    return (
+      <Redirect to={{
+        pathname: '/orderForm',
+        state: { payInfo },
+      }}
+      />
+    );
+  }
+
   return (
     <PlacesWrapper>
       <PageTitle>장바구니</PageTitle>
@@ -60,9 +113,9 @@ const CartPage = () => {
           rowSelection={rowSelection}
           columns={columns}
           dataSource={cartInfo}
-          rowKey={(record) => record}
+          rowKey={(record) => record.partnerInfo.id}
         />
-        <StyledButton>결제하기</StyledButton>
+        <StyledButton onClick={handleGoPay}>결제하기</StyledButton>
       </Container>
     </PlacesWrapper>
   );
@@ -98,6 +151,10 @@ const PartnerInfo = styled.div`
 const PartnerStoreName = styled.h3`
   font-size: 18px;
   font-weight: bold;
+`;
+
+const PartnerStoreDetail = styled.h3`
+  font-size: 15px;
 `;
 
 const StyledButton = styled.button`
