@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { LayoutHOC } from 'components/Layout';
 import Container from 'components/Layout/Container';
 import Slide from 'components/Slide';
@@ -123,7 +124,7 @@ const MainPage = () => {
               <br />
               홍보해 보세요!
             </SectionTitle>
-            <EnrollButton>광고 등록하기</EnrollButton>
+            <EnrollButton><Link to='/places' style={{ color: '#ffffff' }}>광고 등록하기</Link></EnrollButton>
           </div>
           <div className="enroll-image">
             <div className="enroll-pic">
@@ -159,7 +160,7 @@ const MainPage = () => {
       </Section>
       <FloatingBar>
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
-        <ApplyButton>광고 등록하기</ApplyButton>
+        <ApplyButton><Link to='/places' style={{ color: '#ffffff' }}>광고 등록하기</Link></ApplyButton>
       </FloatingBar>
       <PartnerApplyModal open={modalOpen} onClose={handleModalClose} />
     </>

@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import usePartner from 'hooks/usePartner';
 import { Partner } from 'models/partner';
@@ -11,6 +11,10 @@ import PartnerDetailPopup from './PartnerDetailPopup';
 const Places = () => {
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
   const partners = usePartner();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <PlacesWrapper>
