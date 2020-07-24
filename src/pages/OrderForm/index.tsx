@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import OrderFormPage from './OrderFormPage';
 import { useSelector } from 'react-redux';
@@ -15,7 +16,11 @@ const OrderForm = (props: any) => {
   }, []);
 
   if (!props.location.state?.payInfo || !isLoggedIn) {
-    return <BlockLabel>권한이 없습니다.</BlockLabel>;
+    window.alert('로그인을 먼저 해주세요 !');
+    return (
+      <Redirect to={'/login'}
+      />
+    );
   }
 
   return <OrderFormPage payInfo={payInfo} />;
