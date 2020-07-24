@@ -124,7 +124,7 @@ const MainPage = () => {
               <br />
               홍보해 보세요!
             </SectionTitle>
-            <EnrollButton><Link to='/places' style={{ color: '#ffffff' }}>광고 등록하기</Link></EnrollButton>
+            <Link to='/places'><EnrollButton>광고 등록하기</EnrollButton></Link>
           </div>
           <div className="enroll-image">
             <div className="enroll-pic">
@@ -160,7 +160,7 @@ const MainPage = () => {
       </Section>
       <FloatingBar>
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
-        <ApplyButton><Link to='/places' style={{ color: '#ffffff' }}>광고 등록하기</Link></ApplyButton>
+        <Link to='/places'><ApplyButton>광고 등록하기</ApplyButton></Link>
       </FloatingBar>
       <PartnerApplyModal open={modalOpen} onClose={handleModalClose} />
     </>
