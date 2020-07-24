@@ -13,6 +13,7 @@ const OrderComplete = (props: any) => {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!props.location.state?.reservationId) return;
     dispatch(
       getReservationInfo(props.location.state?.reservationId)
