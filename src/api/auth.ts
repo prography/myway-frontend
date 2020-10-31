@@ -9,7 +9,7 @@ export interface JoinParams {
 };
 
 export const joinAdvertiser = async (params: JoinParams) => {
-  const { data } = await fetcher.post('/advertisers',  params );
+  const { data } = await fetcher.post('/abvertisers',  params );
   
   return data;
 };
@@ -20,14 +20,14 @@ export interface LoginParams {
 };
   
 export const loginAdvertiser = async (params: LoginParams) => {
-  const { data } = await fetcher.post('/advertisers/login',  params );
+  const { data } = await fetcher.post('/abvertisers/login',  params );
 
   return data.data.token;
 };
 
 export const getUser = async (token?: string) => {
   const headers = token ? { 'x-access-token': token } : {};
-  const { data } = await fetcher.get<{ data: User }>('/advertisers/me', { headers });
+  const { data } = await fetcher.get<{ data: User }>('/abvertisers/me', { headers });
   
   return data.data;
 };
