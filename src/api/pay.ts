@@ -15,7 +15,7 @@ export interface AddReservationParams {
 export const addReservation = async (params: AddReservationParams) => {
   const token = getAuthToken()?.toString();
   const headers = token ? { 'x-access-token': token } : {};
-  const { data } = await fetcher.post('/ad-reservations', params, {
+  const { data } = await fetcher.post('/ab-reservations', params, {
     headers,
   });
   return data.data.adReservationId;
@@ -24,7 +24,7 @@ export const addReservation = async (params: AddReservationParams) => {
 export const getReservationInfo = async (reservationId: number) => {
   const token = getAuthToken()?.toString();
   const headers = token ? { 'x-access-token': token } : {};
-  const { data } = await fetcher.get<{ data: reservationInfo }>(`/ad-reservations/${reservationId}/info`, {
+  const { data } = await fetcher.get<{ data: reservationInfo }>(`/ab-reservations/${reservationId}/info`, {
     headers,
   });
 
