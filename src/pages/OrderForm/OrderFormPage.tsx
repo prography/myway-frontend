@@ -16,6 +16,7 @@ type Props = {
 const OrderFormPage: React.FC<Props> = ({ payInfo }) => {
   const dispatch = useDispatch();
   const [fileState, setFileState] = useState<FormData>();
+  const [fileType, setFileType] = useState('');
   const [payMethod, setPayMethod] = useState<
     undefined | 'card' | 'deposit' | 'transfer'
   >('card');
@@ -41,6 +42,7 @@ const OrderFormPage: React.FC<Props> = ({ payInfo }) => {
       uploadAd({
         id: reservationId,
         file: fileState,
+        fileType,
       }),
     );
   }, [reservationId]);
@@ -69,9 +71,13 @@ const OrderFormPage: React.FC<Props> = ({ payInfo }) => {
     }
 
     const formData = new FormData();
+    const [fileType] = ad[0].type.split('/');
 
-    formData.append('ad-img', ad[0]);
+    const formDataKey = fileType === 'image' ? 'ad-img' : 'ad-video';
+
+    formData.append(formDataKey, ad[0]);
     setFileState(formData);
+    setFileType(fileType);
 
     const { IMP } = window;
 
