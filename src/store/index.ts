@@ -4,6 +4,7 @@ import AuthReducer, { AuthState } from 'store/auth';
 import CartInfoReducer, { CartState } from 'store/cart';
 import PayReducer, { PayState } from 'store/pay';
 import AdReducer, { AdState } from 'store/ad';
+import MypageReducer, { MypageState } from 'store/mypage';
 
 export type RootState = {
   partner: PartnerState;
@@ -11,6 +12,7 @@ export type RootState = {
   cart: CartState;
   pay: PayState;
   ad: AdState;
+  mypage: MypageState;
 };
 
 export default combineReducers({
@@ -19,4 +21,5 @@ export default combineReducers({
   cart: CartInfoReducer,
   pay: PayReducer,
   ad: AdReducer,
+  mypage: MypageReducer,
 });

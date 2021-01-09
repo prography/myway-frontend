@@ -1,24 +1,19 @@
 import { combineReducers } from 'redux';
-import { createReducer } from 'utils/redux';
-import { addReservationEntity, getReservationInfoEntity } from 'store/pay/action';
-import { reservationInfo } from 'models/reservationInfo';
+import { createReducer } from '../../utils/redux';
+import { getReservationInfoEntity } from './action';
+import { reservationInfo } from '../../models/reservationInfo';
 
-export type PayState = {
-  addReservation: {
-    status: Status;
-    items: number;
-  };
+
+type Status = 'INIT' | 'REQUEST' | 'SUCCESS' | 'FAILURE';
+
+export type MypageState = {
   getReservationInfo: {
     status: Status;
     items: reservationInfo;
   };
 };
 
-const initialState: PayState = {
-  addReservation: {
-    status: 'INIT',
-    items: 0,
-  },
+const initialState: MypageState = {
   getReservationInfo: {
     status: 'INIT',
     items: {
@@ -41,17 +36,11 @@ const initialState: PayState = {
   },
 };
 
-const addReservationReducer = createReducer(
-  addReservationEntity,
-  initialState.addReservation,
-);
-
 const getReservationInfoReducer = createReducer(
   getReservationInfoEntity,
   initialState.getReservationInfo,
 );
 
 export default combineReducers({
-  addReservation: addReservationReducer,
   getReservationInfo: getReservationInfoReducer,
 });

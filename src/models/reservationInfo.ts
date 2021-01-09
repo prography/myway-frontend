@@ -12,6 +12,7 @@ export type adReservationInfo = {
   adReservationId: string;
   createdAt: string;
   paidAmount: number;
+  adStatus: number;
   adTimeTables: adTimeTables[];
 };
 

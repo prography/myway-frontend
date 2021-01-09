@@ -14,6 +14,7 @@ const Detail = lazy(() => import('pages/Detail'));
 const OrderForm = lazy(() => import('pages/OrderForm'));
 const CartPage = lazy(() => import('pages/CartPage'));
 const OrderComplete = lazy(() => import('pages/OrderComplete'));
+const MyPage = lazy(() => import('pages/MyPage'))
 
 const Root = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Root = () => {
           <Route exact path="/orderForm" component={OrderForm} />
           <Route exact path="/cart" component={CartPage} />
           <Route exact path="/orderComplete" component={OrderComplete} />
+          <Route exact path="/mypage" component={MyPage} />
         </Switch>
       </Suspense>
     </Router>

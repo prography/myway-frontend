@@ -1,21 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
-import { adReservationInfo } from 'models/reservationInfo';
+import { adReservationInfo } from '../../models/reservationInfo';
 
 type Props = {
   info: adReservationInfo;
 };
 
-const OrderTable: React.FC<Props> = ({ info }) => {
+function ChangeStatus(props : any){
+  switch(props.value) {
+    case 0 : 
+      return "미업로드";
+    case 1 : 
+      return "대기중";
+    case 2 : 
+      return "승인 완료";
+    case 3 :
+      return "거절";
+    default : 
+      return "해당 없음"
+  }
+}
+
+const MypageTable: React.FC<Props> = ({ info }) => {
   return (
     <>
       <OrderTitle>
+        <div>주문일</div>
+        <div>주문번호</div>
         <div>공간정보</div>
         <div>시간</div>
         <div>주문금액</div>
+        <div>진행상황</div>
       </OrderTitle>
       {info.adTimeTables.map((item, index) => (
-        <OrderItem key={index}>
+          <OrderItem key={index}>
+          <OrderCompleteDate>{info.createdAt}</OrderCompleteDate>
+          <OrderId>{info.adReservationId}</OrderId>
           <OrderPlace>
             <PlaceImg src={item.partnerImgUrl} />
             <div>
@@ -26,33 +46,44 @@ const OrderTable: React.FC<Props> = ({ info }) => {
           </OrderPlace>
           <OrderTime>{item.adDate}<br />{item.adHour}시 ~ {item.adHour + 1}시</OrderTime>
           <OrderPrice>{item.partnerPricePerHour.toLocaleString()}원</OrderPrice>
+          <OrderStatus>
+            {ChangeStatus(info.adStatus)}
+          </OrderStatus>
         </OrderItem>
       ))}
-      <TotalPrice>
-        <div>총 결제금액</div>
-        <div>{info.paidAmount.toLocaleString()}원</div>
-      </TotalPrice>
     </>
   );
 };
 
-export default OrderTable;
+export default MypageTable;
 
 const OrderTitle = styled.div`
   display: grid;
-  grid-template-columns: 55% 20% 25%;
-  font-size: 1.375rem;
+  grid-template-columns: 10% 10% 40% 10% 15% 15%;
+  font-size: 1.rem;
   text-align: center;
-  padding: 1.25rem 0;
+  padding: 1rem 0;
   border-top: solid 2px #25262b;
 `;
 
 const OrderItem = styled.div`
   display: grid;
-  grid-template-columns: 55% 20% 25%;
-  font-size: 1.375rem;
+  grid-template-columns: 10% 10% 40% 10% 15% 15%;
+  font-size: 1rem;
   border-top: solid 0.2px #bbbbbb;
   padding: 1.25rem 0;
+`;
+
+const OrderCompleteDate = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const OrderId = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const OrderPlace = styled.div`
@@ -85,12 +116,8 @@ const OrderPrice = styled.div`
   align-items: center;
 `;
 
-const TotalPrice = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.375rem;
-  padding: 2.0rem;
-  border-top: solid 2px #25262b;
-  border-bottom: solid 2px #25262b;
-  margin-bottom: 4.25rem;
+const OrderStatus = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
 `;
