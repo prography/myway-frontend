@@ -131,6 +131,12 @@ export const Section = styled.div`
         width: 50%;
       }
     }
+
+    .company-info {
+      padding-top: 60px;
+      border-top: 1px solid #333;
+      color: #ddd;
+    }
   }
 
   @media screen and (max-width: 1439px) {
