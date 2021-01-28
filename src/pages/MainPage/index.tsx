@@ -124,7 +124,9 @@ const MainPage = () => {
               <br />
               홍보해 보세요!
             </SectionTitle>
-            <Link to='/places'><EnrollButton>광고 등록하기</EnrollButton></Link>
+            <Link to="/places">
+              <EnrollButton>광고 등록하기</EnrollButton>
+            </Link>
           </div>
           <div className="enroll-image">
             <div className="enroll-pic">
@@ -156,11 +158,20 @@ const MainPage = () => {
               </PartnerEnrollButton>
             </div>
           </div>
+          <div className="company-info">
+            <p>주식회사 프로그라피</p>
+            <p>
+              사업자등록번호 : 390-86-01376 | 대표이사: 강재윤 | 이메일:
+              contact@copl.kr | 주소: 서울 성동구 상원1길 25 4층, 4204호
+            </p>
+          </div>
         </Container>
       </Section>
       <FloatingBar>
         <p>단! 10분만에 완성하는 쉽고 간단한 광고 등록하기</p>
-        <Link to='/places'><ApplyButton>광고 등록하기</ApplyButton></Link>
+        <Link to="/places">
+          <ApplyButton>광고 등록하기</ApplyButton>
+        </Link>
       </FloatingBar>
       <PartnerApplyModal open={modalOpen} onClose={handleModalClose} />
     </>
