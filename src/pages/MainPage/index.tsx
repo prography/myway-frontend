@@ -45,7 +45,7 @@ const MainPage = () => {
           <SectionTitle align="left" color="light">
             나만을 위한 광고,
             <br /> 지금 바로 등록해보세요
-            <br /> COPL에서 빠르고 간편하게
+            <br /> Connecting Place에서 빠르고 간편하게
           </SectionTitle>
         </Container>
       </Section>
@@ -80,7 +80,7 @@ const MainPage = () => {
         <Container>
           <SectionTitle>
             지금까지 <span className="highlight text-orange">32,500명</span>이
-            커플을 이용해서 <br />
+            Connecting Place를 이용해서 <br />
             우리 동네에 광고를 하고 있어요!
           </SectionTitle>
           <FeatureWrap>
@@ -118,7 +118,7 @@ const MainPage = () => {
         <Container>
           <div className="enroll-detail-view">
             <SectionTitle align="left">
-              커플을 이용해서
+              Connecting Place를 이용해서
               <br />
               <span className="highlight">내 가게를 쉽고 간편하게</span>
               <br />
