@@ -158,13 +158,6 @@ const MainPage = () => {
               </PartnerEnrollButton>
             </div>
           </div>
-          <div className="company-info">
-            <p>주식회사 프로그라피</p>
-            <p>
-              사업자등록번호 : 390-86-01376 | 대표이사: 강재윤 | 이메일:
-              contact@copl.kr | 주소: 서울 성동구 상원1길 25 4층, 4204호
-            </p>
-          </div>
         </Container>
       </Section>
       <FloatingBar>
