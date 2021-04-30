@@ -2,7 +2,7 @@ export type availAdTime = {
   id: number;
   adDate: string;
   adHour: number;
-}
+};
 
 export type Partner = {
   id: number;
@@ -14,6 +14,7 @@ export type Partner = {
   createdAt: string;
   address: string;
   workingTime: string;
+  store_name?: string;
   phone: string;
   pricePerHour: number;
   availAdTimeTables: availAdTime[];

@@ -29,6 +29,9 @@ const Header = () => {
           </LogoWrapper>
           <Navigation>
             <li>
+              <Link to="/mypage">마이페이지</Link>
+            </li>
+            <li>
               <Link to="/places">플레이스</Link>
             </li>
             <li>

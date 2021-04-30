@@ -1,6 +1,6 @@
 import { all, fork, take, call } from 'redux-saga/effects';
 import { fetchEntity } from 'utils/saga';
-import { 
+import {
   joinEntity,
   JOIN,
   Join,
@@ -8,13 +8,17 @@ import {
   LOGIN,
   Login,
   meEntity,
+  myOrderEntity,
   ME,
   Me,
+  MYORDER,
+  MyOrder,
 } from 'store/auth/action';
 
 const fetchJoin = fetchEntity(joinEntity);
 const fetchLogin = fetchEntity(loginEntity);
 const fetchMe = fetchEntity(meEntity);
+const fetchMyOrder = fetchEntity(myOrderEntity);
 
 function* watchJoin() {
   while (true) {
@@ -37,10 +41,18 @@ function* watchMe() {
   }
 }
 
+function* watchMyOrder() {
+  while (true) {
+    const { token }: MyOrder = yield take(MYORDER);
+    yield call(fetchMyOrder, token);
+  }
+}
+
 export default function* authSaga() {
   yield all([
     fork(watchJoin),
     fork(watchLogin),
     fork(watchMe),
+    fork(watchMyOrder),
   ]);
 }
